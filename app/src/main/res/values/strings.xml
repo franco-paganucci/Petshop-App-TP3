@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Petshop App TP3</string>
+
+    <string name="onBoarding_Title">Meet your\nanimal needs\nhere</string>
+    <string name="onBoarding_Subtitle">Get interesting promos here, register your account immediately so you can meet your animal needs.</string>
+    <string name="onBoarding_Button">Get Started</string>
+
+    <string name="login_Title">Hello,\nWelcome Back!</string>
+    <string name="login_SubTitle_General">Water is life. Water is a basic human need. In various lines of life, humans need water.</string>
+    <string name="login_bottom">Don\'t have an account? </string>
+    <string name="login_bottomClickeable">Create Account</string>
+
+    <string name="createAccount_Title">Create New\nAccount</string>
+
 </resources>
