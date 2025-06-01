@@ -1,17 +1,18 @@
-package com.example.petshopapptp3.components.shared
+package com.example.petshopapptp3.components.paymentMethod
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TitleSection(title: String,  fontSize: TextUnit = 48.sp) {
+fun PaymentTitle (){
     Text(
-        text = title,
-        fontSize = fontSize,
+        text = "Payment Method",
+        fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
         color = Color.Black
     )
