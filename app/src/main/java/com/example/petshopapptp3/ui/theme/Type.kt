@@ -21,7 +21,7 @@ val Typography = Typography(
         fontFamily = PoppinsFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        lineHeight = 24.sp,
+        lineHeight = 48.sp,
         letterSpacing = 0.5.sp
     ),
     titleLarge = TextStyle(
