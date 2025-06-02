@@ -10,9 +10,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
-fun ClickeableText(Text: String, onClick: () -> Unit) {
+fun ClickeableText(text: String, onClick: () -> Unit) {
     Text(
-        text = Text,
+        text = text,
         style = MaterialTheme.typography.bodySmall.copy(
             color = purple,
             fontWeight = FontWeight.Bold

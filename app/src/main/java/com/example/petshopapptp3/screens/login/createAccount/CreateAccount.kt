@@ -36,7 +36,9 @@ fun CreateAccount(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     onTermsClick: () -> Unit,
-    onPrivacyClick: () -> Unit)
+    onPrivacyClick: () -> Unit,
+    onLoginClick: () -> Unit
+)
 {
     Column(
         modifier = Modifier
@@ -58,25 +60,28 @@ fun CreateAccount(
         Spacer(modifier = Modifier.height(24.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(
                 checked = checked,
-                onCheckedChange = onCheckedChange
+                onCheckedChange = onCheckedChange,
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
             Text(
                 text = "I Agree to the ",
                 style = MaterialTheme.typography.bodySmall
             )
-            ClickeableText ("Terms of service " , onClick = {})
+            ClickeableText("Terms of service ", onClick = onTermsClick)
             Text(
                 text = "And ",
                 style = MaterialTheme.typography.bodySmall
             )
-            ClickeableText ("Privacy Policy " , onClick = {})
+            ClickeableText("Privacy Policy ", onClick = onPrivacyClick)
         }
+
         Spacer(modifier = Modifier.height(24.dp))
-        HaveAccount()
+        HaveAccount(onLoginClick = onLoginClick)
         Spacer(modifier = Modifier.height(24.dp))
         StartButton(ButtonColor = disableButton)
     }
@@ -91,6 +96,7 @@ fun ShowCreateAccount() {
         checked = isChecked,
         onCheckedChange = { isChecked = it },
         onTermsClick = {  },
-        onPrivacyClick = {  }
+        onPrivacyClick = {  },
+        onLoginClick = { }
     )
 }

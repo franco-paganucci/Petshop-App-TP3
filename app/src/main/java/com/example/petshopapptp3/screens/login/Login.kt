@@ -1,4 +1,4 @@
-package com.example.petshopapptp3.screens.Login
+package com.example.petshopapptp3.screens.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.loginComponents.BottomText
 import com.example.petshopapptp3.components.loginComponents.DividerWithOr
@@ -21,32 +23,35 @@ import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.R
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.disableButton
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = 14.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(25.dp))
         TitleSection(stringResource(R.string.login_Title))
         Spacer(modifier = Modifier.height(16.dp))
         SubtitleSection(stringResource(R.string.login_SubTitle_General))
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         InputField()
         Spacer(modifier = Modifier.height(24.dp))
         InputField("Password",true)
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         DividerWithOr()
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         SocialButtons()
-        Spacer(modifier = Modifier.height(30.dp))
-        BottomText (onClick = {})
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(15.dp))
+        BottomText (onClick = {
+            navController.navigate(Screen.CreateAccount.route)
+        })
+        Spacer(modifier = Modifier.height(25.dp))
         StartButton(ButtonColor = disableButton)
     }
 }
@@ -54,5 +59,6 @@ fun LoginScreen() {
 @Preview(showBackground = true)
 @Composable
 fun ShowLoginScreen(){
-    LoginScreen()
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }
