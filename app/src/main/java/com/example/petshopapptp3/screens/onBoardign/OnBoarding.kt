@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,6 +36,7 @@ fun OnBoarding() {
     ) {
 
         Text(
+            style = MaterialTheme.typography.bodyLarge,
             text = stringResource(R.string.onBoarding_Title),
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
@@ -55,6 +57,7 @@ fun OnBoarding() {
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
+            style = MaterialTheme.typography.bodyLarge,
             text = stringResource(R.string.onBoarding_Subtitle),
             fontSize = 14.sp,
             color = Color.Gray,
