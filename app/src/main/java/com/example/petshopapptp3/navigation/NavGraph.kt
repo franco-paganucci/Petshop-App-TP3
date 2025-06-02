@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.petshopapptp3.screens.homepage.bestSeller.BestSellerScreen
 import com.example.petshopapptp3.screens.homepage.cart.CartScreen
 import com.example.petshopapptp3.screens.homepage.home.HomeScreen
 import com.example.petshopapptp3.screens.profile.ProfileScreen
@@ -17,5 +18,6 @@ fun NavGraph(navController: NavHostController) {
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Cart.route) { CartScreen(navController) }
         composable(Screen.Profile.route) { ProfileScreen(navController) }
+        composable(Screen.BestSeller.route) { BestSellerScreen(navController) }
     }
 }

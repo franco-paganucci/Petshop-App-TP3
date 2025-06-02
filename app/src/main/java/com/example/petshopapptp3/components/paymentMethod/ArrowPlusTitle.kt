@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ArrowTitle (onBack: () -> Unit = {}){
+fun ArrowTitle (Text: String = "Payment Method" ,onBack: () -> Unit = {} ){
     Row(
         Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically
@@ -26,6 +26,6 @@ fun ArrowTitle (onBack: () -> Unit = {}){
             Icon(Icons.Default.ArrowBack, contentDescription = "Back")
         }
         Spacer(modifier = Modifier.width(8.dp))
-        PaymentTitle()
+        PaymentTitle(Text)
     }
 }

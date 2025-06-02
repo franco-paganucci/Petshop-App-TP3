@@ -9,9 +9,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PaymentTitle (){
+fun PaymentTitle (Text: String){
     Text(
-        text = "Payment Method",
+        text = Text,
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
         color = Color.Black

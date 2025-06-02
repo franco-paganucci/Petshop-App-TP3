@@ -33,7 +33,7 @@ fun PaymentAdd(){
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ArrowTitle()
+        ArrowTitle("")
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
