@@ -7,7 +7,7 @@
 
     <string name="login_Title">Hello,\nWelcome Back!</string>
     <string name="login_SubTitle_General">Water is life. Water is a basic human need. In various lines of life, humans need water.</string>
-    <string name="login_bottom">Don\'t have an account? </string>
+    <string name="login_bottom">Don\'t have an account?</string>
     <string name="login_bottomClickeable">Create Account</string>
 
     <string name="createAccount_Title">Create New\nAccount</string>

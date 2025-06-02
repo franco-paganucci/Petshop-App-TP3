@@ -22,7 +22,7 @@ import com.example.petshopapptp3.components.loginComponents.HaveAccount
 import com.example.petshopapptp3.components.shared.InputField
 
 @Composable
-fun PasswordWithEmail (){
+fun PasswordWithEmail (onLoginClick: () -> Unit){
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -37,15 +37,17 @@ fun PasswordWithEmail (){
         Spacer(modifier = Modifier.height(30.dp))
         InputField()
         Spacer(modifier = Modifier.height(400.dp))
-        HaveAccount()
+        HaveAccount(onLoginClick = onLoginClick)
         Spacer(modifier = Modifier.height(16.dp))
         StartButton("Next", onClick = {} )
 
     }
 }
 
-@Preview (showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun showPasswordWithEmail (){
-    PasswordWithEmail()
+fun showPasswordWithEmail() {
+    PasswordWithEmail(
+        onLoginClick = {}
+    )
 }

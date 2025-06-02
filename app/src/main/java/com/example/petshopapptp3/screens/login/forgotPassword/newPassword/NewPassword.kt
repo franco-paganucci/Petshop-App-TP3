@@ -21,7 +21,7 @@ import com.example.petshopapptp3.components.loginComponents.HaveAccount
 import com.example.petshopapptp3.components.shared.InputField
 
 @Composable
-fun NewPassword (){
+fun NewPassword (onLoginClick: () -> Unit){
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +38,7 @@ fun NewPassword (){
         Spacer(modifier = Modifier.height(16.dp))
         InputField("Confirm Password")
         Spacer(modifier = Modifier.height(300.dp))
-        HaveAccount()
+        HaveAccount(onLoginClick = onLoginClick)
         Spacer(modifier = Modifier.height(16.dp))
         StartButton("Reset Password", onClick = {})
 
@@ -48,5 +48,7 @@ fun NewPassword (){
 @Preview (showBackground = true)
 @Composable
 fun ShowNewPassword (){
-    NewPassword()
+    NewPassword(
+        onLoginClick = { }
+    )
 }
