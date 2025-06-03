@@ -17,12 +17,14 @@ import androidx.compose.ui.unit.sp
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.paymentMethod.PaymentOptionCard
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
 import com.example.petshopapptp3.components.shared.TitleSection
+import com.example.petshopapptp3.navigation.Screen
 
 @Composable
 fun PaymentChoose(
-    onCheckout: () -> Unit = {}
+    navController: NavController
 ) {
     var selectedMethod by remember { mutableStateOf("Paypal") }
 
@@ -32,7 +34,9 @@ fun PaymentChoose(
             .padding(horizontal = 24.dp, vertical = 16.dp)
             .verticalScroll(rememberScrollState()), // Habilita scroll
     ) {
-        ArrowTitle()
+        ArrowTitle(){
+            navController.popBackStack()
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -56,14 +60,8 @@ fun PaymentChoose(
             enabled = false
         )
 
-        Spacer(modifier = Modifier.height(400.dp))
+        Spacer(modifier = Modifier.height(100.dp))
 
-        StartButton("Checkout", onClick = {})
+        StartButton("Checkout", onClick = {navController.navigate(Screen.PaymentSuccess.route)})
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowPaymentChoose (){
-    PaymentChoose()
 }

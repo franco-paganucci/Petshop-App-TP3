@@ -9,13 +9,17 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.petshopapptp3.components.paymentMethod.PaymentTitle
 import com.example.petshopapptp3.screens.homepage.bestSeller.BestSellerScreen
 import com.example.petshopapptp3.screens.homepage.cart.CartScreen
 import com.example.petshopapptp3.screens.homepage.home.HomeScreen
 import com.example.petshopapptp3.screens.homepage.notification.notificationscreen.NotificationScreen
 import com.example.petshopapptp3.screens.homepage.productDetail.ProductDetailScreen
 import com.example.petshopapptp3.screens.homepage.search.SearchScreen
-import com.example.petshopapptp3.screens.profile.ProfileScreen
+import com.example.petshopapptp3.screens.paymentMethod.add.PaymentAdd
+import com.example.petshopapptp3.screens.paymentMethod.choose.PaymentChoose
+import com.example.petshopapptp3.screens.paymentMethod.success.PaymentSucces
+import com.example.petshopapptp3.screens.profilepage.ProfileScreen
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 
 @Composable
@@ -30,7 +34,9 @@ fun NavGraph(navController: NavHostController) {
         composable(Screen.BestSeller.route) { BestSellerScreen(navController) }
         composable(Screen.Notification.route) { NotificationScreen(navController) }
         composable(Screen.Search.route) { SearchScreen(navController) }
-
+        composable (Screen.PaymentAdd.route){ PaymentAdd(navController) }
+        composable (Screen.PaymentChoose.route){ PaymentChoose(navController) }
+        composable (Screen.PaymentSuccess.route){ PaymentSucces(navController) }
 
         composable(
             route = Screen.ProductDetail.route,

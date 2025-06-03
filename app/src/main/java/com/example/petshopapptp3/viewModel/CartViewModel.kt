@@ -31,7 +31,6 @@ class CartViewModel @Inject constructor(
 
     fun addProductToCart(product: Product, quantity: Int) {
         viewModelScope.launch {
-            // Actualizamos la lista en memoria para el envío a la API
             val index = cartProducts.indexOfFirst { it.id == product.id }
             if (index != -1) {
                 val existing = cartProducts[index]
@@ -40,7 +39,6 @@ class CartViewModel @Inject constructor(
                 cartProducts.add(CartProduct(id = product.id, quantity = quantity))
             }
 
-            // Guardamos en Room para que se muestre en CartScreen
             val entity = CartItemEntity(
                 id = product.id,
                 title = product.title,
@@ -50,7 +48,6 @@ class CartViewModel @Inject constructor(
             )
             repository.addCartItem(entity)
 
-            println("✅ Producto agregado: ${product.title} x$quantity")
         }
     }
 
@@ -67,10 +64,10 @@ class CartViewModel @Inject constructor(
                 _cart.value = response
                 currentCartId = response.id
                 saveCartToLocal(response)
-                cartProducts.clear() // ✅ Limpiar después del envío
-                println("📤 Carrito enviado y limpiado")
+                cartProducts.clear()
+                println("Carrito enviado y limpiado")
             } catch (e: Exception) {
-                println("❌ Error al enviar carrito: ${e.message}")
+                println("Error al enviar carrito: ${e.message}")
             }
         }
     }
@@ -113,10 +110,10 @@ class CartViewModel @Inject constructor(
                 currentCartId?.let { id ->
                     val response = RetroFitInstance.api.getCartById(id)
                     _cart.value = response
-                    println("🛒 Carrito cargado: ${response.products}")
-                } ?: println("ℹ️ No hay carrito activo")
+                    println("Carrito cargado: ${response.products}")
+                } ?: println("No hay carrito activo")
             } catch (e: Exception) {
-                println("❌ Error al obtener el carrito: ${e.message}")
+                println("Error al obtener el carrito: ${e.message}")
             }
         }
     }
@@ -129,7 +126,7 @@ class CartViewModel @Inject constructor(
                 currentCartId = null
                 cartProducts.clear()
                 clearLocalCart()
-                println("🗑️ Carrito eliminado")
+                println("Carrito eliminado")
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val purple = Color(0xFF7140FD)
 val disableButton = Color(0xFFE5E4E3)
+val cardColor = Color(0xFFF8F8F8)

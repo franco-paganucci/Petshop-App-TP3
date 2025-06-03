@@ -1,8 +1,6 @@
 package com.example.petshopapptp3.screens.homepage.search
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -20,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -30,7 +27,6 @@ import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
 fun SearchScreen(navController: NavController) {
     var searchQuery by remember { mutableStateOf("") }
 
-    // Simulación de categorías y búsqueda reciente
     val categories = listOf("Feed", "Toys", "Accessories")
     var selectedCategory by remember { mutableStateOf("Feed") }
 
@@ -49,7 +45,9 @@ fun SearchScreen(navController: NavController) {
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        ArrowTitle("Search")
+        ArrowTitle("Search"){
+            navController.popBackStack()
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -70,7 +68,6 @@ fun SearchScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // CategorySection simulado si ya tenés uno
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxWidth()

@@ -17,9 +17,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.petshopapptp3.navigation.Screen
 
 @Composable
-fun CartSummary(cartItems: List<CartItem>,totalPrice: Double, purple: Color) {
+fun CartSummary(cartItems: List<CartItem>,totalPrice: Double, purple: Color, navController: NavController) {
     val totalItems = cartItems.size
 
 
@@ -54,7 +56,7 @@ fun CartSummary(cartItems: List<CartItem>,totalPrice: Double, purple: Color) {
         }
         Spacer(modifier = Modifier.height(12.dp))
         Button(
-            onClick = { /* Navegar a Checkout */ },
+            onClick = { navController.navigate(Screen.PaymentAdd.route)},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),

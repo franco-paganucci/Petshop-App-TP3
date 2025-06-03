@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Button
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -17,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.petshopapptp3.components.homePage.cart.CartItem
 import com.example.petshopapptp3.components.homePage.cart.CartSummary
 import com.example.petshopapptp3.components.homePage.cart.CartTopBar
 import com.example.petshopapptp3.viewmodel.CartViewModel
@@ -26,7 +26,6 @@ fun CartScreen(
     navController: NavController,
     cartViewModel: CartViewModel = hiltViewModel()
 ) {
-    val cartState by cartViewModel.cart.collectAsState()
     val cartItems by cartViewModel.localCartItems.collectAsState(initial = emptyList())
     val purple = Color(0xFF7B61FF)
 
@@ -60,7 +59,7 @@ fun CartScreen(
 
             CartSummary(
                 cartItems = cartItems.map {
-                    com.example.petshopapptp3.components.homePage.cart.CartItem(
+                    CartItem(
                         title = it.title,
                         description = "Qty: ${it.quantity}",
                         price = it.price,
@@ -68,20 +67,12 @@ fun CartScreen(
                     )
                 },
                 purple = purple,
-                totalPrice = total
+                totalPrice = total,
+                navController = navController
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-
-            Button(
-                onClick = {
-                    cartViewModel.submitCartToApi()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Finalizar compra")
-            }
 
         } else {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

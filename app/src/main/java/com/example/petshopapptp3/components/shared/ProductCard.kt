@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.petshopapptp3.data.remote.Product
+import com.example.petshopapptp3.ui.theme.cardColor
 
 
 @Composable
@@ -32,7 +33,7 @@ fun ProductCard(
     Box(
         modifier = modifier
             .clickable { onClick() }
-            .background(Color.White, RoundedCornerShape(16.dp))
+            .background(cardColor, RoundedCornerShape(16.dp))
             .border(1.dp, gray, RoundedCornerShape(16.dp))
             .padding(12.dp)
     ) {
