@@ -47,7 +47,7 @@ fun LoginScreen() {
         Spacer(modifier = Modifier.height(30.dp))
         BottomText (onClick = {})
         Spacer(modifier = Modifier.height(48.dp))
-        StartButton(ButtonColor = disableButton)
+        StartButton(ButtonColor = disableButton, onClick = {})
     }
 }
 

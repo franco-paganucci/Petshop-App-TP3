@@ -21,10 +21,12 @@ import com.example.petshopapptp3.ui.theme.purple
 fun StartButton(
     Text: String = stringResource(R.string.onBoarding_Button),
     ButtonColor: Color = purple,
-    TextColor: Color = Color.White)
+    TextColor: Color = Color.White,
+    onClick: () -> Unit = {}
+)
 {
     Button(
-        onClick = {  },
+        onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(containerColor = ButtonColor),
         shape = RoundedCornerShape(50),
         modifier = Modifier
@@ -39,5 +41,5 @@ fun StartButton(
 @Preview(showBackground = true)
 @Composable
 fun ShowButton(){
-    StartButton()
+    StartButton(onClick = { })
 }

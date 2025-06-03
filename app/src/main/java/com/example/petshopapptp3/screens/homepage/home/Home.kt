@@ -14,19 +14,27 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 import androidx.compose.foundation.lazy.items
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.petshopapptp3.components.homePage.BestSellerHeader
 import com.example.petshopapptp3.components.homePage.CategorySection
 import com.example.petshopapptp3.components.homePage.PromoCard
 import com.example.petshopapptp3.components.shared.HomeTopBar
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.screens.homepage.location.Location
 
 
 @Composable
 fun HomeScreen(navController: NavController) {
     val purple = Color(0xFF7B61FF)
-    val viewModel: ProductViewModel = viewModel()
+    val viewModel: ProductViewModel = hiltViewModel()
     val products by viewModel.products.collectAsState()
+
+    var showLocationModal by remember { mutableStateOf(false) }
+
+    if (showLocationModal) {
+        Location(onDismiss = { showLocationModal = false })
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -35,14 +43,14 @@ fun HomeScreen(navController: NavController) {
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item { HomeTopBar() }
+        item { HomeTopBar(navController, onLocationClick = { showLocationModal = true }) }
         item { PromoCard(purple) }
         item { CategorySection(purple) }
         item { BestSellerHeader(purple) {
             navController.navigate(Screen.BestSeller.route)
         } }
         items(products.take(6).chunked(2)) { rowProducts ->
-            ProductRow(rowProducts = rowProducts, purple = purple)
+            ProductRow(rowProducts = rowProducts, purple = purple, navController = navController)
         }
         item { Spacer(modifier = Modifier.height(24.dp)) }
     }

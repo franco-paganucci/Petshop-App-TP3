@@ -45,7 +45,8 @@ fun BestSellerScreen(navController: NavController) {
                         product = product,
                         purple = purple,
                         gray = gray,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        onClick = { }
                     )
                 }
 

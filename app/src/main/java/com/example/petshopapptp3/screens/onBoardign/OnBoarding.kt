@@ -60,6 +60,7 @@ fun OnBoarding() {
             style = MaterialTheme.typography.bodyLarge,
             text = stringResource(R.string.onBoarding_Subtitle),
             fontSize = 14.sp,
+            lineHeight = 14.sp,
             color = Color.Gray,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 24.dp)
@@ -74,7 +75,7 @@ fun OnBoarding() {
             modifier = Modifier.padding(top = 24.dp)
         )
 
-        StartButton()
+        StartButton(onClick = {})
     }
 }
 

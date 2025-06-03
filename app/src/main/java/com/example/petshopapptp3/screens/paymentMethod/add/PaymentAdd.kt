@@ -48,7 +48,7 @@ fun PaymentAdd(){
         Spacer(modifier = Modifier.height(16.dp))
         InputField("CVV")
         Spacer(modifier = Modifier.height(350.dp))
-        StartButton("Checkout")
+        StartButton("Checkout", onClick = {})
     }
 }
 

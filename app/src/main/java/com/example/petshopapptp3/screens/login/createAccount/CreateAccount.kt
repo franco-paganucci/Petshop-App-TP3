@@ -78,7 +78,7 @@ fun CreateAccount(
         Spacer(modifier = Modifier.height(24.dp))
         HaveAccount()
         Spacer(modifier = Modifier.height(24.dp))
-        StartButton(ButtonColor = disableButton)
+        StartButton(ButtonColor = disableButton, onClick = {})
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.petshopapptp3.components.shared
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,14 +18,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.petshopapptp3.navigation.Screen
 
 @Composable
-fun HomeTopBar() {
+fun HomeTopBar(navController: NavController,
+               onLocationClick: () -> Unit
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column {
+        Column (
+            modifier = Modifier.clickable { onLocationClick() }
+        ) {
             Text("Location", fontSize = 12.sp, color = Color.Gray)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("Jebres, Surakarta", fontWeight = FontWeight.Bold)
@@ -32,10 +39,10 @@ fun HomeTopBar() {
             }
         }
         Row {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate(Screen.Search.route)}) {
                 Icon(Icons.Default.Search, contentDescription = null)
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate(Screen.Notification.route)}) {
                 Icon(Icons.Default.Notifications, contentDescription = null)
             }
         }

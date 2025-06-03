@@ -40,7 +40,7 @@ fun NewPassword (){
         Spacer(modifier = Modifier.height(300.dp))
         HaveAccount()
         Spacer(modifier = Modifier.height(16.dp))
-        StartButton("Reset Password")
+        StartButton("Reset Password", onClick = {})
 
     }
 }

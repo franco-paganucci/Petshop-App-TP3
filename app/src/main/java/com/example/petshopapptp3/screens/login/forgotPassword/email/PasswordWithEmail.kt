@@ -39,7 +39,7 @@ fun PasswordWithEmail (){
         Spacer(modifier = Modifier.height(400.dp))
         HaveAccount()
         Spacer(modifier = Modifier.height(16.dp))
-        StartButton("Next")
+        StartButton("Next", onClick = {} )
 
     }
 }

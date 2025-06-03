@@ -18,11 +18,9 @@ class ProductViewModel : ViewModel() {
 
     private fun fetchProducts() {
         viewModelScope.launch {
-            println("Entrando al try")
             try {
                 val response = RetroFitInstance.api.getProducts()
                 println("Productos recibidos: ${response.products.size}")
-                response.products.forEach { println(it.title) }
                 _products.value = response.products.filter {
                     it.title.contains("Eggs", ignoreCase = true) ||
                             it.title.contains("Fish", ignoreCase = true) ||

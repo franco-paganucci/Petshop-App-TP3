@@ -2,6 +2,7 @@ package com.example.petshopapptp3.components.shared
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,9 +22,16 @@ import com.example.petshopapptp3.data.remote.Product
 
 
 @Composable
-fun ProductCard(product: Product, purple: Color, gray: Color, modifier: Modifier = Modifier) {
+fun ProductCard(
+    product: Product,
+    purple: Color,
+    gray: Color,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Box(
         modifier = modifier
+            .clickable { onClick() }
             .background(Color.White, RoundedCornerShape(16.dp))
             .border(1.dp, gray, RoundedCornerShape(16.dp))
             .padding(12.dp)

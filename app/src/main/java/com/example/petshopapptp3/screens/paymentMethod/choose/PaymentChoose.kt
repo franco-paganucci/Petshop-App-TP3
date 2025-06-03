@@ -58,7 +58,7 @@ fun PaymentChoose(
 
         Spacer(modifier = Modifier.height(400.dp))
 
-        StartButton("Checkout")
+        StartButton("Checkout", onClick = {})
     }
 }
 
