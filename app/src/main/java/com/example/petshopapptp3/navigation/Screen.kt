@@ -1,8 +1,10 @@
 package com.example.petshopapptp3.navigation
 
 sealed class Screen(val route: String) {
+    object Login : Screen("login")
+    object CreateAccount : Screen("create_account")
     object Home : Screen("home")
-    object Cart : Screen("cart")
+    object Cart : Screen("cartScreen")
     object Profile : Screen("profileScreen")
     object BestSeller : Screen("best_seller")
     object Notification : Screen("notification")
@@ -10,7 +12,6 @@ sealed class Screen(val route: String) {
     object PaymentAdd: Screen("paymentAdd")
     object PaymentChoose: Screen("paymentChoose")
     object PaymentSuccess: Screen("paymentSuccess")
-
     object ProductDetail : Screen("product_detail/{productId}") {
         fun createRoute(productId: Int) = "product_detail/$productId"
     }

@@ -2,32 +2,56 @@ package com.example.petshopapptp3.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.petshopapptp3.components.paymentMethod.PaymentTitle
 import com.example.petshopapptp3.screens.homepage.bestSeller.BestSellerScreen
-import com.example.petshopapptp3.screens.homepage.cart.CartScreen
 import com.example.petshopapptp3.screens.homepage.home.HomeScreen
 import com.example.petshopapptp3.screens.homepage.notification.notificationscreen.NotificationScreen
 import com.example.petshopapptp3.screens.homepage.productDetail.ProductDetailScreen
 import com.example.petshopapptp3.screens.homepage.search.SearchScreen
+import com.example.petshopapptp3.screens.login.LoginScreen
+import com.example.petshopapptp3.screens.login.createAccount.CreateAccount
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.example.petshopapptp3.screens.homepage.cart.CartScreen
 import com.example.petshopapptp3.screens.paymentMethod.add.PaymentAdd
 import com.example.petshopapptp3.screens.paymentMethod.choose.PaymentChoose
 import com.example.petshopapptp3.screens.paymentMethod.success.PaymentSucces
-import com.example.petshopapptp3.screens.profilepage.ProfileScreen
+import com.example.petshopapptp3.screens.profilePage.profile.ProfileScreen
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 
 @Composable
 fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route)
+        startDestination = Screen.Login.route)
     {
+        composable(Screen.Login.route) {
+            LoginScreen(navController)
+        }
+        composable(Screen.CreateAccount.route) {
+            var isChecked by remember { mutableStateOf(false) }
+
+            CreateAccount(
+                checked = isChecked,
+                onCheckedChange = { isChecked = it },
+                onTermsClick = {
+                    // TODO: navegar a una pantalla de Términos
+                },
+                onPrivacyClick = {
+                    // TODO: navegar a una pantalla de Política de Privacidad
+                },
+                onLoginClick = { navController.navigate(Screen.Login.route) {
+                    popUpTo(Screen.CreateAccount.route) { inclusive = true }
+                } }
+            )
+        }
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Cart.route) { CartScreen(navController) }
         composable(Screen.Profile.route) { ProfileScreen(navController) }
