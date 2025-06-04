@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TitleSection(title: String,  fontSize: TextUnit = 48.sp) {
+fun TitleSection(title: String,  fontSize: TextUnit = 40.sp) {
     Text(
         text = title,
         fontSize = fontSize,

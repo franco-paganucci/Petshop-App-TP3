@@ -20,7 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.petshopapptp3.components.buttons.StartButton
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.data.remote.Product
 import com.example.petshopapptp3.viewmodel.CartViewModel
 import kotlinx.coroutines.launch

@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.petshopapptp3.components.homePage.cart.CartItem
 import com.example.petshopapptp3.components.homePage.cart.CartSummary
 import com.example.petshopapptp3.components.homePage.cart.CartTopBar
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewmodel.CartViewModel
 
 @Composable
@@ -35,7 +36,7 @@ fun CartScreen(
             .background(Color.White)
             .padding(16.dp)
     ) {
-        CartTopBar { navController.popBackStack() }
+        CartTopBar { navController.navigate(Screen.Home.route) }
 
         Spacer(modifier = Modifier.height(16.dp))
 

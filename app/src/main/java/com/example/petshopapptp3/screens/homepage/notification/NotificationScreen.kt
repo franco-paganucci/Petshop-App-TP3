@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.example.petshopapptp3.components.homePage.notification.NotificationData
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.homePage.notification.NotificationList
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 
 
 @OptIn(ExperimentalMaterial3Api::class)

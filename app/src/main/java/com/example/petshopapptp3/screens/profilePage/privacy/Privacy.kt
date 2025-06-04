@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 
 @Composable
 fun PrivacyView(

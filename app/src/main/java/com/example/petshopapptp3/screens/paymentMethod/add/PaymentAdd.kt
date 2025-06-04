@@ -11,23 +11,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.petshopapptp3.components.buttons.StartButton
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
-import com.example.petshopapptp3.components.paymentMethod.PaymentTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
 
 
 @Composable
-fun PaymentAdd(navController: NavController){
+fun PaymentAdd(navController: NavController) {
+    var cardNumber by remember { mutableStateOf("") }
+    var cardName by remember { mutableStateOf("") }
+    var expiryDate by remember { mutableStateOf("") }
+    var cvv by remember { mutableStateOf("") }
+
+    var showErrors by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,24 +40,70 @@ fun PaymentAdd(navController: NavController){
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ArrowTitle(){
-            navController.popBackStack()
+        ArrowTitle {
+            navController.navigate(Screen.Cart.route)
         }
 
         Spacer(modifier = Modifier.height(20.dp))
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
-        ) { TitleSection("Add New Payment", 16.sp) }
+        ) {
+            TitleSection("Add New Payment", 16.sp)
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
-        InputField("Card Number")
+
+        InputField(
+            label = "Card Number",
+            value = cardNumber,
+            onValueChange = { cardNumber = it },
+            isError = cardNumber.isBlank(),
+            showError = showErrors
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
-        InputField("Card Name")
+
+        InputField(
+            label = "Card Name",
+            value = cardName,
+            onValueChange = { cardName = it },
+            isError = cardName.isBlank(),
+            showError = showErrors
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
-        InputField("Expired")
+
+        InputField(
+            label = "Expired",
+            value = expiryDate,
+            onValueChange = { expiryDate = it },
+            isError = expiryDate.isBlank(),
+            showError = showErrors
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
-        InputField("CVV")
+
+        InputField(
+            label = "CVV",
+            value = cvv,
+            onValueChange = { cvv = it },
+            isError = cvv.isBlank(),
+            showError = showErrors
+        )
+
+
         Spacer(modifier = Modifier.height(100.dp))
-        StartButton("Checkout", onClick = {navController.navigate(Screen.PaymentChoose.route)})
+
+        StartButton("Checkout", onClick = {
+            if (cardNumber.isBlank() || cardName.isBlank() || expiryDate.isBlank() || cvv.isBlank()) {
+                showErrors = true
+            } else {
+                showErrors = false
+                navController.navigate(Screen.PaymentChoose.route)
+            }
+        })
     }
 }
+

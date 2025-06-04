@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
+import com.example.petshopapptp3.navigation.Screen
 
 @Composable
 fun PaymentSucces (navController: NavController){
@@ -32,7 +33,7 @@ fun PaymentSucces (navController: NavController){
             SubtitleSection("your order is being prepared by the shop, the courier will send it to your address")
         }
 
-        StartButton("Go Home")
+        StartButton("Go Home", onClick = { navController.navigate(Screen.Home.route)})
     }
 
 }
