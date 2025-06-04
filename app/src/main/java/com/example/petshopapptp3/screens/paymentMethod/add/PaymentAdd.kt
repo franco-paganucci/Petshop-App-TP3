@@ -17,15 +17,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
 import com.example.petshopapptp3.components.paymentMethod.PaymentTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.components.shared.TitleSection
+import com.example.petshopapptp3.navigation.Screen
 
 
 @Composable
-fun PaymentAdd(){
+fun PaymentAdd(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,7 +35,10 @@ fun PaymentAdd(){
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ArrowTitle("")
+        ArrowTitle(){
+            navController.popBackStack()
+        }
+
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -47,13 +52,7 @@ fun PaymentAdd(){
         InputField("Expired")
         Spacer(modifier = Modifier.height(16.dp))
         InputField("CVV")
-        Spacer(modifier = Modifier.height(350.dp))
-        StartButton("Checkout")
+        Spacer(modifier = Modifier.height(100.dp))
+        StartButton("Checkout", onClick = {navController.navigate(Screen.PaymentChoose.route)})
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowAdd (){
-    PaymentAdd()
 }

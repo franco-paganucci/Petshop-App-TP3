@@ -14,6 +14,7 @@ import com.example.petshopapptp3.viewmodel.ProductViewModel
 import androidx.compose.foundation.lazy.items
 import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
 import com.example.petshopapptp3.components.shared.ProductCard
+import com.example.petshopapptp3.navigation.Screen
 
 @Composable
 fun BestSellerScreen(navController: NavController) {
@@ -30,7 +31,9 @@ fun BestSellerScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            ArrowTitle("Best Seller")
+            ArrowTitle("Best Seller"){
+                navController.popBackStack()
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -45,7 +48,8 @@ fun BestSellerScreen(navController: NavController) {
                         product = product,
                         purple = purple,
                         gray = gray,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        onClick = { navController.navigate(Screen.ProductDetail.createRoute(product.id)) }
                     )
                 }
 

@@ -40,7 +40,7 @@ fun NewPassword (onLoginClick: () -> Unit){
         Spacer(modifier = Modifier.height(300.dp))
         HaveAccount(onLoginClick = onLoginClick)
         Spacer(modifier = Modifier.height(16.dp))
-        StartButton("Reset Password")
+        StartButton("Reset Password", onClick = {})
 
     }
 }

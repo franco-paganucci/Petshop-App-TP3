@@ -11,12 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
 
 @Composable
-fun PaymentSucces (){
+fun PaymentSucces (navController: NavController){
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -34,10 +35,4 @@ fun PaymentSucces (){
         StartButton("Go Home")
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowPaymentSuccess(){
-    PaymentSucces()
 }

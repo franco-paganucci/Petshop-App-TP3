@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ArrowTitle (Text: String = "Payment Method" ,onBack: () -> Unit = {} ){
     Row(
-        Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = onBack) {

@@ -39,7 +39,7 @@ fun PasswordWithEmail (onLoginClick: () -> Unit){
         Spacer(modifier = Modifier.height(400.dp))
         HaveAccount(onLoginClick = onLoginClick)
         Spacer(modifier = Modifier.height(16.dp))
-        StartButton("Next")
+        StartButton("Next", onClick = {} )
 
     }
 }
