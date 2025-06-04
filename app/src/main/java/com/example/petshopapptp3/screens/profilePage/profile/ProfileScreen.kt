@@ -26,6 +26,7 @@ import com.example.petshopapptp3.components.profile.ModeButton
 import com.example.petshopapptp3.components.profile.StatItem
 import com.example.petshopapptp3.components.profile.FilterChip
 import com.example.petshopapptp3.components.shared.ProductRow
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 
 @Composable
@@ -51,10 +52,25 @@ fun ProfileScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    ModeButton("Profile", !isSellerMode) { isSellerMode = false }
-                    ModeButton("Seller Mode", isSellerMode) { isSellerMode = true }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                        ModeButton("Profile", !isSellerMode) { isSellerMode = false }
+                        ModeButton("Seller Mode", isSellerMode) { isSellerMode = true }
+                    }
+
+                    IconButton(onClick = { navController.navigate(Screen.Settings.route) }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.settings),
+                            contentDescription = "Settings",
+                            tint = Color.Black
+                        )
+                    }
                 }
+
 
                 Spacer(modifier = Modifier.height(8.dp))
 

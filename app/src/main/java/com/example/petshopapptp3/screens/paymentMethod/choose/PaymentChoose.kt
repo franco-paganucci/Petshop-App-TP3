@@ -11,20 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.paymentMethod.PaymentOptionCard
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.viewmodel.CartViewModel
 
 @Composable
 fun PaymentChoose(
-    navController: NavController
+    navController: NavController,
+    cartViewModel: CartViewModel
 ) {
     var selectedMethod by remember { mutableStateOf("Paypal") }
 
@@ -32,10 +32,10 @@ fun PaymentChoose(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp, vertical = 16.dp)
-            .verticalScroll(rememberScrollState()), // Habilita scroll
+            .verticalScroll(rememberScrollState()),
     ) {
-        ArrowTitle(){
-            navController.popBackStack()
+        ArrowTitle {
+            navController.navigate(Screen.PaymentAdd.route)
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -57,11 +57,14 @@ fun PaymentChoose(
             title = "Bank Transfer",
             isSelected = selectedMethod == "Bank Transfer",
             onClick = { selectedMethod = "Bank Transfer" },
-            enabled = false
+            enabled = true
         )
 
         Spacer(modifier = Modifier.height(100.dp))
 
-        StartButton("Checkout", onClick = {navController.navigate(Screen.PaymentSuccess.route)})
+        StartButton("Checkout", onClick = {
+            cartViewModel.clearEverything()
+            navController.navigate(Screen.PaymentSuccess.route)
+        })
     }
 }

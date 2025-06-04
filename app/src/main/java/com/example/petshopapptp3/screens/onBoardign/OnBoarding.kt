@@ -21,12 +21,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.buttons.StartButton
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
-fun OnBoarding() {
+fun OnBoarding(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -75,12 +77,6 @@ fun OnBoarding() {
             modifier = Modifier.padding(top = 24.dp)
         )
 
-        StartButton(onClick = {})
+        StartButton(onClick = {navController.navigate(Screen.Login.route)})
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowOnBoarding(){
-    OnBoarding()
 }

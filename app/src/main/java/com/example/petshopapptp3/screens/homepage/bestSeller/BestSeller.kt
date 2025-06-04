@@ -12,7 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 import androidx.compose.foundation.lazy.items
-import com.example.petshopapptp3.components.paymentMethod.ArrowTitle
+import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.ProductCard
 import com.example.petshopapptp3.navigation.Screen
 

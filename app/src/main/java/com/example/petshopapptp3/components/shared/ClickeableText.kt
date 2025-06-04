@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
@@ -17,12 +19,6 @@ fun ClickeableText(text: String, onClick: () -> Unit) {
             color = purple,
             fontWeight = FontWeight.Bold
         ),
-        modifier = Modifier.clickable { onClick ( ) }
+        modifier = Modifier.clickable(onClick = onClick)
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowClickeableText (){
-    ClickeableText("HOLA", onClick = {})
 }
