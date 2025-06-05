@@ -35,20 +35,31 @@ fun SettingsScreen(navController: NavController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        ArrowTitle("Settings Page")
+        ArrowTitle("Settings Page"){
+            navController.popBackStack()
+        }
         Spacer(modifier = Modifier.height(24.dp))
 
-        // TODO: NAVIGATION
         Text("Account", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
         Spacer(modifier = Modifier.height(8.dp))
-        SettingsRow("Account", R.drawable.profile, onClick = { })
-        SettingsRow("Address", R.drawable.home_active, onClick = { })
+        SettingsRow("Account", R.drawable.profile, onClick = {
+            navController.navigate(Screen.Account.route)
+        })
+        SettingsRow("Address", R.drawable.home_active, onClick = {
+            // TODO: NAVIGATION
+        })
         SettingsRow("Notification", R.drawable.notification, onClick = {
             navController.navigate(Screen.SettingNotifications.route)
         })
-        SettingsRow("Payment Method", R.drawable.wallet, onClick = { })
-        SettingsRow("Privacy", R.drawable.danger_circle, onClick = { })
-        SettingsRow("Security", R.drawable.key, onClick = { })
+        SettingsRow("Payment Method", R.drawable.wallet, onClick = {
+            // TODO: NAVIGATION
+        })
+        SettingsRow("Privacy", R.drawable.danger_circle, onClick = {
+            // TODO: NAVIGATION
+        })
+        SettingsRow("Security", R.drawable.key, onClick = {
+            // TODO: NAVIGATION
+        })
 
 
         Spacer(modifier = Modifier.height(16.dp))
