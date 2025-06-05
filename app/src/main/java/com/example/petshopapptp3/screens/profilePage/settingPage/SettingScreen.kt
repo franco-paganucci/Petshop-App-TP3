@@ -22,6 +22,7 @@ import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.navigation.Screen
 import androidx.compose.foundation.clickable
+import com.example.petshopapptp3.components.profile.SettingsRow
 
 @Composable
 fun SettingsScreen(navController: NavController) {
@@ -33,52 +34,58 @@ fun SettingsScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        ArrowTitle("Settings Page"){
-            navController.popBackStack()
+        Column {
+            ArrowTitle("Settings Page") {
+                navController.navigate(Screen.Profile.route)
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text("Account", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            SettingsRow("Account", R.drawable.profile) {
+                navController.navigate(Screen.Account.route)
+            }
+            SettingsRow("Address", R.drawable.home_active) {
+                // TODO: NAVIGATION
+            }
+            SettingsRow("Notification", R.drawable.notification) {
+                navController.navigate(Screen.SettingNotifications.route)
+            }
+            SettingsRow("Payment Method", R.drawable.wallet) {
+                navController.navigate(Screen.PaymentAdd.createRoute(true))
+            }
+            SettingsRow("Privacy", R.drawable.danger_circle) {
+                navController.navigate(Screen.TermsAndPrivacy.route)
+            }
+            SettingsRow("Security", R.drawable.key) {
+                navController.navigate(Screen.Security.route)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text("Help", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            SettingsRow("Contact Us", R.drawable.phone) {
+                // TODO: CONTACT US
+            }
+            SettingsRow("FAQ", R.drawable.document) {
+                navController.navigate(Screen.FAQ.route)
+            }
         }
-        Spacer(modifier = Modifier.height(24.dp))
 
-        Text("Account", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
-        Spacer(modifier = Modifier.height(8.dp))
-        SettingsRow("Account", R.drawable.profile, onClick = {
-            navController.navigate(Screen.Account.route)
-        })
-        SettingsRow("Address", R.drawable.home_active, onClick = {
-            // TODO: NAVIGATION
-        })
-        SettingsRow("Notification", R.drawable.notification, onClick = {
-            navController.navigate(Screen.SettingNotifications.route)
-        })
-        SettingsRow("Payment Method", R.drawable.wallet, onClick = {
-            // TODO: NAVIGATION
-        })
-        SettingsRow("Privacy", R.drawable.danger_circle, onClick = {
-            // TODO: NAVIGATION
-        })
-        SettingsRow("Security", R.drawable.key, onClick = {
-            // TODO: NAVIGATION
-        })
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text("Help", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
-        Spacer(modifier = Modifier.height(8.dp))
-        SettingsRow("Contact Us", R.drawable.phone , onClick = { })
-        SettingsRow("FAQ", R.drawable.document, onClick = { })
-
-
-        Spacer(modifier = Modifier.weight(1f))
-
+        // Botón Log Out anclado abajo
         Button(
             onClick = { navController.navigate(Screen.Login.route) },
             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
             border = ButtonDefaults.outlinedButtonBorder.copy(width = 1.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 12.dp)
                 .height(50.dp)
         ) {
             Text("Log Out", color = Color(0xFF7B61FF))
@@ -86,33 +93,8 @@ fun SettingsScreen(navController: NavController) {
     }
 }
 
-// TODO: PONER EN UNA CARPETA POR SEPARADO
-@Composable
-fun SettingsRow(title: String, iconRes: Int, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() }
-            .padding(vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(id = iconRes),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(title, fontSize = 14.sp)
-        }
 
-        Icon(
-            painter = painterResource(id = R.drawable.arrow_right),
-            contentDescription = null,
-            modifier = Modifier.size(16.dp)
-        )
-    }
-}
+
+
 
 

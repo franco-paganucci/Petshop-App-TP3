@@ -6,42 +6,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.room.Room
 import com.example.petshopapptp3.components.shared.ArrowTitle
-import com.example.petshopapptp3.data.local.AppDatabase
-import com.example.petshopapptp3.data.local.NotificationSettingEntity
-import kotlinx.coroutines.launch
 
 @Composable
 fun SettingNotificationsScreen(navController: NavController) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
-    val db = remember {
-        Room.databaseBuilder(context, AppDatabase::class.java, "app-db").build()
-    }
-    val dao = db.notificationSettingDao()
-
     var likedPost by remember { mutableStateOf(true) }
     var newMessage by remember { mutableStateOf(true) }
     var itemSold by remember { mutableStateOf(true) }
-
-    LaunchedEffect(Unit) {
-        likedPost = dao.getSettingById("liked_post")?.enabled ?: true
-        newMessage = dao.getSettingById("new_message")?.enabled ?: true
-        itemSold = dao.getSettingById("item_sold")?.enabled ?: true
-    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        ArrowTitle("Notification"){
+        ArrowTitle("Notification") {
             navController.popBackStack()
         }
 
@@ -57,16 +38,10 @@ fun SettingNotificationsScreen(navController: NavController) {
 
         NotificationRow("Liked Post", likedPost) {
             likedPost = it
-            scope.launch {
-                dao.upsert(NotificationSettingEntity("liked_post", it))
-            }
         }
 
         NotificationRow("New Message", newMessage) {
             newMessage = it
-            scope.launch {
-                dao.upsert(NotificationSettingEntity("new_message", it))
-            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -81,12 +56,10 @@ fun SettingNotificationsScreen(navController: NavController) {
 
         NotificationRow("Item Sold", itemSold) {
             itemSold = it
-            scope.launch {
-                dao.upsert(NotificationSettingEntity("item_sold", it))
-            }
         }
     }
 }
+
 
 @Composable
 fun NotificationRow(title: String, checked: Boolean, onToggle: (Boolean) -> Unit) {

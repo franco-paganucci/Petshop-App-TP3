@@ -45,9 +45,11 @@ fun Location(onDismiss: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
 
 
+            var searchText by remember { mutableStateOf("") }
+
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = searchText,
+                onValueChange = { searchText = it },
                 placeholder = { Text("Search your Location") },
                 leadingIcon = {
                     Icon(Icons.Default.Search, contentDescription = null)
@@ -59,6 +61,7 @@ fun Location(onDismiss: () -> Unit) {
                     focusedBorderColor = Color(0xFF7B61FF)
                 )
             )
+
 
             Spacer(modifier = Modifier.height(24.dp))
 

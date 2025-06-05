@@ -7,6 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,6 +28,7 @@ import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.profile.ModeButton
 import com.example.petshopapptp3.components.profile.StatItem
 import com.example.petshopapptp3.components.profile.FilterChip
+import com.example.petshopapptp3.components.shared.ClickeableText
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewmodel.ProductViewModel
@@ -52,6 +56,7 @@ fun ProfileScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
+                // Header con botones de modo y settings
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -64,23 +69,23 @@ fun ProfileScreen(navController: NavController) {
 
                     IconButton(onClick = { navController.navigate(Screen.Settings.route) }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.settings),
+                            imageVector = Icons.Default.Settings,
                             contentDescription = "Settings",
                             tint = Color.Black
                         )
                     }
                 }
 
-
                 Spacer(modifier = Modifier.height(8.dp))
 
+                // Imagen principal (avatar o logo)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(220.dp)
                         .clip(RoundedCornerShape(20.dp))
                 ) {
-                    val tintColor = if (isSellerMode) Color(0xFFCEDDEF) else Color(0xFFFFD5B3)
+                    val tintColor = if (!isSellerMode) Color(0xFFCEDDEF) else Color(0xFFFFD5B3)
                     val yOffset = 50.dp
 
                     Image(
@@ -98,9 +103,7 @@ fun ProfileScreen(navController: NavController) {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        val yOffset = 50.dp
-
-                        if (isSellerMode) {
+                        if (!isSellerMode) {
                             Image(
                                 painter = painterResource(id = R.drawable.avatar4),
                                 contentDescription = "Avatar",
@@ -120,20 +123,21 @@ fun ProfileScreen(navController: NavController) {
                             )
                         }
                     }
-
                 }
-
 
                 Spacer(modifier = Modifier.height(8.dp))
 
 
-                if (isSellerMode) {
+                if (!isSellerMode) {
                     Text("Abduldul", fontSize = 22.sp, fontWeight = FontWeight.Bold)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        FilterChip("Saved")
-                        FilterChip("Edit Profile")
+                        FilterChip("Saved", onClick = { })
+                        FilterChip("Edit Profile", onClick = {
+                            navController.navigate(Screen.Account.route)
+                        })
                     }
                 } else {
+
                     Text("Pittashop", fontSize = 22.sp, fontWeight = FontWeight.Bold)
                     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         StatItem("109", "Followers")
@@ -141,9 +145,9 @@ fun ProfileScreen(navController: NavController) {
                         StatItem("80", "Sales")
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        FilterChip("Product")
-                        FilterChip("Sold")
-                        FilterChip("Stats")
+                        FilterChip("Product", onClick = {})
+                        FilterChip("Sold" , onClick = {})
+                        FilterChip("Stats" , onClick = {})
                     }
                 }
 
@@ -151,9 +155,14 @@ fun ProfileScreen(navController: NavController) {
             }
 
             items(products.chunked(2)) { rowProducts ->
-                ProductRow(rowProducts = rowProducts, purple = purple, navController = navController)
+                ProductRow(
+                    rowProducts = rowProducts,
+                    purple = purple,
+                    navController = navController
+                )
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
     }
 }
+

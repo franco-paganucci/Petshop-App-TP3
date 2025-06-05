@@ -34,6 +34,7 @@ import com.example.petshopapptp3.components.shared.ClickeableText
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 
+
 @Composable
 fun CreateAccount(
     checked: Boolean,
@@ -51,8 +52,8 @@ fun CreateAccount(
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
 
-    val allFieldsFilled = fullName.isNotBlank() && email.isNotBlank() && password.isNotBlank()
-    val buttonColor = if (allFieldsFilled) purple else disableButton
+    val allFieldsValid = fullName.isNotBlank() && email.isNotBlank() && password.isNotBlank() && checked
+    val buttonColor = if (allFieldsValid) purple else disableButton
 
     Column(
         modifier = Modifier
@@ -111,10 +112,11 @@ fun CreateAccount(
                 emailError = email.isBlank()
                 passwordError = password.isBlank()
 
-                if (allFieldsFilled) {
+                if (allFieldsValid) {
                     navController.navigate(Screen.Login.route)
                 }
             }
         )
     }
 }
+

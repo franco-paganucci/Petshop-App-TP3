@@ -25,7 +25,7 @@ import com.example.petshopapptp3.navigation.Screen
 
 
 @Composable
-fun PaymentAdd(navController: NavController) {
+fun PaymentAdd(navController: NavController, fromSettings: Boolean) {
     var cardNumber by remember { mutableStateOf("") }
     var cardName by remember { mutableStateOf("") }
     var expiryDate by remember { mutableStateOf("") }
@@ -38,70 +38,73 @@ fun PaymentAdd(navController: NavController) {
             .fillMaxSize()
             .padding(32.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        ArrowTitle {
-            navController.navigate(Screen.Cart.route)
+        Column {
+            ArrowTitle {
+                navController.popBackStack()
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                TitleSection("Add New Payment", 16.sp)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            InputField(
+                label = "Card Number",
+                value = cardNumber,
+                onValueChange = { cardNumber = it },
+                isError = showErrors && cardNumber.isBlank(),
+                showError = showErrors
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            InputField(
+                label = "Card Name",
+                value = cardName,
+                onValueChange = { cardName = it },
+                isError = showErrors && cardName.isBlank(),
+                showError = showErrors
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            InputField(
+                label = "Expired",
+                value = expiryDate,
+                onValueChange = { expiryDate = it },
+                isError = showErrors && expiryDate.isBlank(),
+                showError = showErrors
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            InputField(
+                label = "CVV",
+                value = cvv,
+                onValueChange = { cvv = it },
+                isError = showErrors && cvv.isBlank(),
+                showError = showErrors
+            )
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            TitleSection("Add New Payment", 16.sp)
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        InputField(
-            label = "Card Number",
-            value = cardNumber,
-            onValueChange = { cardNumber = it },
-            isError = cardNumber.isBlank(),
-            showError = showErrors
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        InputField(
-            label = "Card Name",
-            value = cardName,
-            onValueChange = { cardName = it },
-            isError = cardName.isBlank(),
-            showError = showErrors
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        InputField(
-            label = "Expired",
-            value = expiryDate,
-            onValueChange = { expiryDate = it },
-            isError = expiryDate.isBlank(),
-            showError = showErrors
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        InputField(
-            label = "CVV",
-            value = cvv,
-            onValueChange = { cvv = it },
-            isError = cvv.isBlank(),
-            showError = showErrors
-        )
-
-
-        Spacer(modifier = Modifier.height(100.dp))
 
         StartButton("Checkout", onClick = {
             if (cardNumber.isBlank() || cardName.isBlank() || expiryDate.isBlank() || cvv.isBlank()) {
                 showErrors = true
             } else {
                 showErrors = false
-                navController.navigate(Screen.PaymentChoose.route)
+                if (!fromSettings) {
+                    navController.navigate(Screen.PaymentChoose.route)
+                } else {
+                    navController.popBackStack()
+                }
             }
         })
     }

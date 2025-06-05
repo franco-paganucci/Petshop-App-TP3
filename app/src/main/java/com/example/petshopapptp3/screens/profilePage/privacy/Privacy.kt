@@ -30,7 +30,9 @@ fun PrivacyView(navController: NavController) {
                 .padding(horizontal = 24.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            ArrowTitle("hola")
+            ArrowTitle("Privacy"){
+                navController.popBackStack()
+            }
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
@@ -70,9 +72,3 @@ fun PrivacyView(navController: NavController) {
             )
         }
     }
-
-@Preview(showBackground = true)
-@Composable
-fun ShowPrivacy(){
-    PrivacyView(navController = rememberNavController())
-}

@@ -18,6 +18,7 @@ import com.example.petshopapptp3.screens.login.createAccount.CreateAccount
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.petshopapptp3.navigation.Screen.ChangePassword
 import com.example.petshopapptp3.screens.homepage.cart.CartScreen
 import com.example.petshopapptp3.screens.homepage.notification.NotificationScreen
 import com.example.petshopapptp3.screens.login.forgotPassword.email.PasswordWithEmail
@@ -27,7 +28,12 @@ import com.example.petshopapptp3.screens.paymentMethod.add.PaymentAdd
 import com.example.petshopapptp3.screens.paymentMethod.choose.PaymentChoose
 import com.example.petshopapptp3.screens.paymentMethod.success.PaymentSucces
 import com.example.petshopapptp3.screens.profilePage.account.AccountScreen
+import com.example.petshopapptp3.screens.profilePage.change.ChangeEmail
+import com.example.petshopapptp3.screens.profilePage.change.ChangePassword
+import com.example.petshopapptp3.screens.profilePage.faq.FaqScreen
+import com.example.petshopapptp3.screens.profilePage.privacy.PrivacyView
 import com.example.petshopapptp3.screens.profilePage.profile.ProfileScreen
+import com.example.petshopapptp3.screens.profilePage.security.SecurityScreen
 import com.example.petshopapptp3.screens.profilePage.settingPage.SettingsScreen
 import com.example.petshopapptp3.screens.profilePage.settingNotifications.SettingNotificationsScreen
 import com.example.petshopapptp3.viewmodel.CartViewModel
@@ -50,10 +56,10 @@ fun NavGraph(navController: NavHostController) {
                 onCheckedChange = { isChecked = it },
                 navController = navController,
                 onTermsClick = {
-                    // TODO: navegar a una pantalla de Términos
+
                 },
                 onPrivacyClick = {
-                    // TODO: navegar a una pantalla de Política de Privacidad
+
                 },
                 onLoginClick = { navController.navigate(Screen.Login.route) {
                     popUpTo(Screen.CreateAccount.route) { inclusive = true }
@@ -68,7 +74,17 @@ fun NavGraph(navController: NavHostController) {
         composable(Screen.BestSeller.route) { BestSellerScreen(navController) }
         composable(Screen.Notification.route) { NotificationScreen(navController) }
         composable(Screen.Search.route) { SearchScreen(navController) }
-        composable (Screen.PaymentAdd.route){ PaymentAdd(navController) }
+        composable(
+            route = "payment_add/{fromSettings}",
+            arguments = listOf(
+                navArgument("fromSettings") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val fromSettingsString = backStackEntry.arguments?.getString("fromSettings") ?: "false"
+            val fromSettings = fromSettingsString.toBooleanStrictOrNull() ?: false
+            PaymentAdd(navController, fromSettings)
+        }
+
         composable(Screen.PaymentChoose.route) {
             val cartViewModel: CartViewModel = hiltViewModel()
             PaymentChoose(navController, cartViewModel)
@@ -91,5 +107,11 @@ fun NavGraph(navController: NavHostController) {
                 ProductDetailScreen(product = it, navController = navController)
             }
         }
+        composable (Screen.TermsAndPrivacy.route){ PrivacyView(navController) }
+        composable (Screen.ChangeEmail.route){ ChangeEmail(navController) }
+        composable (Screen.ChangePassword.route){ ChangePassword(navController) }
+        composable (Screen.Security.route){ SecurityScreen(navController) }
+        composable (Screen.FAQ.route){ FaqScreen(navController) }
+
     }
 }

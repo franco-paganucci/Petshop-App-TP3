@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CartTopBar(onBack: () -> Unit) {
+fun CartTopBar(onClick: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
     ) {
-        IconButton(onClick = onBack) {
+        IconButton(onClick = onClick) {
             Icon(Icons.Default.ArrowBack, contentDescription = "Back")
         }
         Text(

@@ -56,7 +56,7 @@ fun CartSummary(cartItems: List<CartItem>,totalPrice: Double, purple: Color, nav
         }
         Spacer(modifier = Modifier.height(12.dp))
         Button(
-            onClick = { navController.navigate(Screen.PaymentAdd.route)},
+            onClick = { navController.navigate(Screen.PaymentAdd.createRoute(false)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),

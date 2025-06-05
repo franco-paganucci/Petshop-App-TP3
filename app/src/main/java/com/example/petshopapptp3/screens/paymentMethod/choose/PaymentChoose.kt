@@ -32,39 +32,45 @@ fun PaymentChoose(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp, vertical = 16.dp)
-            .verticalScroll(rememberScrollState()),
     ) {
-        ArrowTitle {
-            navController.navigate(Screen.PaymentAdd.route)
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ) {
+            ArrowTitle {
+                navController.navigate(Screen.PaymentSuccess.route)
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            TitleSection("Add New Payment", 16.sp)
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            PaymentOptionCard(
+                title = "Paypal",
+                isSelected = selectedMethod == "Paypal",
+                onClick = { selectedMethod = "Paypal" },
+                enabled = true
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            PaymentOptionCard(
+                title = "Bank Transfer",
+                isSelected = selectedMethod == "Bank Transfer",
+                onClick = { selectedMethod = "Bank Transfer" },
+                enabled = true
+            )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
-
-        TitleSection("Add New Payment", 16.sp)
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        PaymentOptionCard(
-            title = "Paypal",
-            isSelected = selectedMethod == "Paypal",
-            onClick = { selectedMethod = "Paypal" },
-            enabled = true
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        PaymentOptionCard(
-            title = "Bank Transfer",
-            isSelected = selectedMethod == "Bank Transfer",
-            onClick = { selectedMethod = "Bank Transfer" },
-            enabled = true
-        )
-
-        Spacer(modifier = Modifier.height(100.dp))
 
         StartButton("Checkout", onClick = {
             cartViewModel.clearEverything()
             navController.navigate(Screen.PaymentSuccess.route)
         })
     }
+
 }

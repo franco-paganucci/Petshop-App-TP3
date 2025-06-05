@@ -1,9 +1,11 @@
 package com.example.petshopapptp3.screens.profilePage.account
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -34,74 +36,76 @@ fun AccountScreen(navController: NavController) {
     var username by remember { mutableStateOf("Abdul") }
     var email by remember { mutableStateOf("Abdul") }
 
-    Column(modifier = Modifier.padding(16.dp)) {
-
-        ArrowTitle(Text = "Account") {
-            navController.navigate(Screen.Settings.route)
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(220.dp)
-                .clip(RoundedCornerShape(20.dp))
-        ) {
-            val yOffset = 50.dp
-
-            Image(
-                painter = painterResource(id = R.drawable.fondo_avatar),
-                contentDescription = "Fondo decorativo",
-                modifier = Modifier
-                    .matchParentSize()
-                    .offset(y = yOffset)
-                    .clip(RoundedCornerShape(20.dp)),
-                contentScale = ContentScale.Crop,
-            )
-
-            // Ícono editar fondo (si quisieras agregarlo)
-            IconButton(
-                onClick = { /* Edit background */ },
-                modifier = Modifier.align(Alignment.TopEnd)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.edit), // Usa tu ícono
-                    contentDescription = "Editar fondo"
-                )
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column {
+            ArrowTitle(Text = "Account") {
+                navController.navigate(Screen.Settings.route)
             }
 
-            // Imagen del avatar centrado
-            Column(
+            Box(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .offset(y = 40.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .clip(RoundedCornerShape(20.dp))
             ) {
+                val yOffset = 50.dp
+
                 Image(
-                    painter = painterResource(id = R.drawable.avatar4), // Usa tu avatar
-                    contentDescription = "Avatar",
+                    painter = painterResource(id = R.drawable.fondo_avatar),
+                    contentDescription = "Fondo decorativo",
                     modifier = Modifier
-                        .clip(RoundedCornerShape(100))
-                        .height(80.dp)
+                        .matchParentSize()
+                        .offset(y = yOffset)
+                        .clip(RoundedCornerShape(20.dp)),
+                    contentScale = ContentScale.Crop,
                 )
 
-                Text(
-                    text = "Abduldul",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
+                IconButton(
+                    onClick = { /* Edit background */ },
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.edit),
+                        contentDescription = "Editar fondo"
+                    )
+                }
+
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .offset(y = 40.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.avatar4),
+                        contentDescription = "Avatar",
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(100))
+                            .height(80.dp)
+                    )
+
+                    Text(
+                        text = "Abduldul",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
             }
+
+            Spacer(modifier = Modifier.height(60.dp))
+
+            InputField(label = "Name", value = name, onValueChange = { name = it })
+            Spacer(modifier = Modifier.height(12.dp))
+            InputField(label = "Username", value = username, onValueChange = { username = it })
+            Spacer(modifier = Modifier.height(12.dp))
+            InputField(label = "Email", value = email, onValueChange = { email = it })
         }
 
-        Spacer(modifier = Modifier.height(60.dp))
-
-        // Campos de entrada
-        InputField(label = "Name", value = name, onValueChange = { name = it })
-        Spacer(modifier = Modifier.height(12.dp))
-        InputField(label = "Username", value = username, onValueChange = { username = it })
-        Spacer(modifier = Modifier.height(12.dp))
-        InputField(label = "Email", value = email, onValueChange = { email = it })
-
-        // Botón Guardar
         StartButton(
             Text = "Save Changes",
             onClick = {

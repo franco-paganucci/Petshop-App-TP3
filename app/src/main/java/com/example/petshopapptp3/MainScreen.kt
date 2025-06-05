@@ -29,7 +29,18 @@ fun MainScreen() {
         Screen.PaymentAdd.route,
         Screen.PaymentChoose.route,
         Screen.PaymentSuccess.route,
-        Screen.Account.route
+        Screen.Account.route,
+        Screen.TermsAndPrivacy.route,
+        Screen.ChangeEmail.route,
+        Screen.ChangePassword.route,
+        Screen.Security.route,
+        Screen.Notification.route,
+        Screen.SettingNotifications.route,
+        Screen.TermsAndPrivacy.route,
+        Screen.FAQ.route,
+        Screen.BestSeller.route,
+        Screen.Search.route
+
 
     )
 

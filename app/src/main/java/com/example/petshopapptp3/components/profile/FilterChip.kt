@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun FilterChip(label: String) {
+fun FilterChip(label: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .background(Color(0xFFF1F1F1), shape = RoundedCornerShape(16.dp))
