@@ -1,4 +1,4 @@
-package com.example.petshopapptp3.screens.homepage.notification.notificationscreen
+package com.example.petshopapptp3.screens.homepage.notification
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

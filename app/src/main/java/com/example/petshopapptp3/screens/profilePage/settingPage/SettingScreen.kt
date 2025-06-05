@@ -43,7 +43,9 @@ fun SettingsScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
         SettingsRow("Account", R.drawable.profile, onClick = { })
         SettingsRow("Address", R.drawable.home_active, onClick = { })
-        SettingsRow("Notification", R.drawable.notification, onClick = { })
+        SettingsRow("Notification", R.drawable.notification, onClick = {
+            navController.navigate(Screen.SettingNotifications.route)
+        })
         SettingsRow("Payment Method", R.drawable.wallet, onClick = { })
         SettingsRow("Privacy", R.drawable.danger_circle, onClick = { })
         SettingsRow("Security", R.drawable.key, onClick = { })
