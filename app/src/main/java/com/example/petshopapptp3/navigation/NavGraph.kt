@@ -11,7 +11,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.petshopapptp3.screens.homepage.bestSeller.BestSellerScreen
 import com.example.petshopapptp3.screens.homepage.home.HomeScreen
-import com.example.petshopapptp3.screens.homepage.notification.notificationscreen.NotificationScreen
 import com.example.petshopapptp3.screens.homepage.productDetail.ProductDetailScreen
 import com.example.petshopapptp3.screens.homepage.search.SearchScreen
 import com.example.petshopapptp3.screens.login.loginScreen.LoginScreen
@@ -20,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.petshopapptp3.screens.homepage.cart.CartScreen
+import com.example.petshopapptp3.screens.homepage.notification.NotificationScreen
 import com.example.petshopapptp3.screens.login.forgotPassword.email.PasswordWithEmail
 import com.example.petshopapptp3.screens.login.forgotPassword.newPassword.NewPassword
 import com.example.petshopapptp3.screens.onBoardign.OnBoarding
@@ -29,6 +29,7 @@ import com.example.petshopapptp3.screens.paymentMethod.success.PaymentSucces
 import com.example.petshopapptp3.screens.profilePage.account.AccountScreen
 import com.example.petshopapptp3.screens.profilePage.profile.ProfileScreen
 import com.example.petshopapptp3.screens.profilePage.settingPage.SettingsScreen
+import com.example.petshopapptp3.screens.profilePage.settingNotifications.SettingNotificationsScreen
 import com.example.petshopapptp3.viewmodel.CartViewModel
 import com.example.petshopapptp3.viewmodel.ProductViewModel
 
@@ -77,7 +78,7 @@ fun NavGraph(navController: NavHostController) {
         composable (Screen.ForgotPasswordEmail.route) { PasswordWithEmail({},navController) }
         composable (Screen.Settings.route) { SettingsScreen(navController) }
         composable (Screen.Account.route){ AccountScreen(navController) }
-
+        composable(Screen.SettingNotifications.route){ SettingNotificationsScreen(navController) }
         composable(
             route = Screen.ProductDetail.route,
             arguments = listOf(navArgument("productId") { type = NavType.IntType })
