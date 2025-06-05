@@ -16,12 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.petshopapptp3.components.shared.ArrowTitle
 
 @Composable
-fun PrivacyView(
-
-) {
+fun PrivacyView(navController: NavController) {
 
         Column(
             modifier = Modifier
@@ -74,5 +74,5 @@ fun PrivacyView(
 @Preview(showBackground = true)
 @Composable
 fun ShowPrivacy(){
-    PrivacyView()
+    PrivacyView(navController = rememberNavController())
 }
