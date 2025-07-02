@@ -52,19 +52,7 @@ fun NavGraph(navController: NavHostController) {
             var isChecked by remember { mutableStateOf(false) }
 
             CreateAccount(
-                checked = isChecked,
-                onCheckedChange = { isChecked = it },
                 navController = navController,
-                onTermsClick = {
-
-                },
-                onPrivacyClick = {
-
-                },
-                onLoginClick = { navController.navigate(Screen.Login.route) {
-                    popUpTo(Screen.CreateAccount.route) { inclusive = true }
-                }
-                }
             )
         }
         composable (Screen.OnBoarding.route) { OnBoarding(navController) }

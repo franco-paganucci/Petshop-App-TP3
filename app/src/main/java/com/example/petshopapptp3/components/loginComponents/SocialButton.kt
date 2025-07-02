@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import com.example.petshopapptp3.R
 
 @Composable
@@ -34,22 +35,27 @@ fun SocialButtons() {
 }
 
 @Composable
-fun SocialButton(text: String, icon: Painter, modifier: Modifier = Modifier) {
+fun SocialButton(
+    text: String,
+    icon: Painter,
+    modifier: Modifier = Modifier,
+    height: Dp = 56.dp,
+    iconSize: Dp = 20.dp,
+    paddingHorizontal: Dp = 8.dp
+) {
     OutlinedButton(
         onClick = {},
         modifier = modifier
-            .height(60.dp)
-            .padding(horizontal = 4.dp),
+            .height(height)
+            .padding(horizontal = paddingHorizontal),
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, Color.LightGray),
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = Color.Black
-        )
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
     ) {
         Icon(
             painter = icon,
             contentDescription = null,
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier.size(iconSize),
             tint = Color.Unspecified
         )
         Spacer(modifier = Modifier.width(8.dp))

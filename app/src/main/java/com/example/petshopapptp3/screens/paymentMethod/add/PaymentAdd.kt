@@ -22,6 +22,7 @@ import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 
 
 @Composable
@@ -106,7 +107,9 @@ fun PaymentAdd(navController: NavController, fromSettings: Boolean) {
                     navController.popBackStack()
                 }
             }
-        })
+        },
+            ButtonColor = purple
+        )
     }
 }
 

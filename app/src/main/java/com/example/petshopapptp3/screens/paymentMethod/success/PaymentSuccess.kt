@@ -18,6 +18,7 @@ import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
 fun PaymentSucces(navController: NavController) {
@@ -41,7 +42,9 @@ fun PaymentSucces(navController: NavController) {
 
         StartButton("Go Home", onClick = {
             navController.navigate(Screen.Home.route)
-        })
+        },
+            ButtonColor = purple
+        )
     }
 }
 

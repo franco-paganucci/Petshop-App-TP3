@@ -29,6 +29,7 @@ import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
 fun AccountScreen(navController: NavController) {
@@ -107,7 +108,8 @@ fun AccountScreen(navController: NavController) {
         }
 
         StartButton(
-            Text = "Save Changes",
+            text = "Save Changes",
+            ButtonColor = purple,
             onClick = {
                 navController.navigate(Screen.Profile.route)
             }

@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 import com.example.petshopapptp3.viewmodel.CartViewModel
 
 @Composable
@@ -70,7 +71,9 @@ fun PaymentChoose(
         StartButton("Checkout", onClick = {
             cartViewModel.clearEverything()
             navController.navigate(Screen.PaymentSuccess.route)
-        })
+        },
+            ButtonColor = purple
+        )
     }
 
 }

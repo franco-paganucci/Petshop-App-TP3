@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.petshopapptp3.R
@@ -19,27 +21,28 @@ import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
 fun StartButton(
-    Text: String = stringResource(R.string.onBoarding_Button),
-    ButtonColor: Color = purple,
-    TextColor: Color = Color.White,
-    onClick: () -> Unit = {}
-)
-{
+    text: String,
+    ButtonColor: Color,
+    fontSize: TextUnit = 16.sp,
+    height: Dp = 56.dp,
+    onClick: () -> Unit
+) {
     Button(
-        onClick = { onClick() },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = ButtonColor),
-        shape = RoundedCornerShape(50),
         modifier = Modifier
             .fillMaxWidth()
-            .height(90.dp)
-            .padding(top = 32.dp)
+            .height(height),
+        shape = RoundedCornerShape(12.dp)
     ) {
-        Text(text = Text, color = TextColor)
+        Text(text = text, fontSize = fontSize, color = Color.White)
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun ShowButton(){
-    StartButton(onClick = { })
+    StartButton(text = "Show", onClick = { }, ButtonColor = purple)
 }

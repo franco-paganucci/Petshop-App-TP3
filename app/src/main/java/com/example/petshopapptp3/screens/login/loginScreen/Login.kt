@@ -25,87 +25,113 @@ import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.R
-import com.example.petshopapptp3.components.shared.ClickeableText
+import com.example.petshopapptp3.components.shared.ClickableText
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.disableButton
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.ProvideWindowSize
+import com.example.petshopapptp3.util.responsiveSizes
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    ProvideWindowSize {
+        val sizes = responsiveSizes()
 
-    var emailError by remember { mutableStateOf(false) }
-    var passwordError by remember { mutableStateOf(false) }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
 
-    val allFieldsFilled = email.isNotBlank() && password.isNotBlank()
-    val buttonColor = if (allFieldsFilled) purple else disableButton
+        var emailError by remember { mutableStateOf(false) }
+        var passwordError by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 14.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(modifier = Modifier.height(25.dp))
-        TitleSection(stringResource(R.string.login_Title))
-        Spacer(modifier = Modifier.height(16.dp))
-        SubtitleSection(stringResource(R.string.login_SubTitle_General))
-        Spacer(modifier = Modifier.height(15.dp))
+        val allFieldsFilled = email.isNotBlank() && password.isNotBlank()
+        val buttonColor = if (allFieldsFilled) purple else disableButton
 
-        InputField(
-            label = "Email",
-            value = email,
-            onValueChange = {
-                email = it
-                if (it.isNotBlank()) emailError = false
-            },
-            isError = emailError,
-            showError = true
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 14.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Spacer(modifier = Modifier.height(sizes.paddingTop))
 
-        Spacer(modifier = Modifier.height(24.dp))
+            TitleSection(
+                title = stringResource(R.string.login_Title),
+                fontSize = sizes.titleFontSize,
+                lineHeight = sizes.titleLineHeight
+            )
 
-        InputField(
-            label = "Password",
-            value = password,
-            onValueChange = {
-                password = it
-                if (it.isNotBlank()) passwordError = false
-            },
-            isPassword = true,
-            isError = passwordError,
-            showError = true
-        )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(15.dp))
-        DividerWithOr()
-        Spacer(modifier = Modifier.height(15.dp))
-        SocialButtons()
-        Spacer(modifier = Modifier.height(15.dp))
-        ClickeableText("Forgot Your Password?", onClick = {
-            navController.navigate(Screen.ForgotPasswordEmail.route)
-        })
-        Spacer(modifier = Modifier.height(15.dp))
-        BottomText(onClick = {
-            navController.navigate(Screen.CreateAccount.route)
-        })
-        Spacer(modifier = Modifier.height(25.dp))
+            SubtitleSection(
+                subtitle = stringResource(R.string.login_SubTitle_General),
+                fontSize = sizes.subtitleFontSize,
+                lineHeight = sizes.subtitleLineHeight
+            )
 
-        StartButton(
-            ButtonColor = buttonColor,
-            onClick = {
-                emailError = email.isBlank()
-                passwordError = password.isBlank()
+            Spacer(modifier = Modifier.height(15.dp))
 
-                if (allFieldsFilled) {
-                    navController.navigate(Screen.Home.route)
+            InputField(
+                label = "Email",
+                value = email,
+                onValueChange = {
+                    email = it
+                    if (it.isNotBlank()) emailError = false
+                },
+                isError = emailError,
+                showError = true,
+                fontSize = sizes.inputFontSize,
+                paddingVertical = sizes.inputPaddingVertical,
+                height = sizes.inputHeight
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            InputField(
+                label = "Password",
+                value = password,
+                onValueChange = {
+                    password = it
+                    if (it.isNotBlank()) passwordError = false
+                },
+                isPassword = true,
+                isError = passwordError,
+                showError = true,
+                fontSize = sizes.inputFontSize,
+                paddingVertical = sizes.inputPaddingVertical,
+                height = sizes.inputHeight
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+            DividerWithOr()
+            Spacer(modifier = Modifier.height(5.dp))
+            SocialButtons()
+            Spacer(modifier = Modifier.height(10.dp))
+            ClickableText("Forgot Your Password?", onClick = {
+                navController.navigate(Screen.ForgotPasswordEmail.route)
+            })
+            Spacer(modifier = Modifier.height(5.dp))
+            BottomText(onClick = {
+                navController.navigate(Screen.CreateAccount.route)
+            })
+            Spacer(modifier = Modifier.height(10.dp))
+
+            StartButton(
+                ButtonColor = buttonColor,
+                text = "Login",
+                onClick = {
+                    emailError = email.isBlank()
+                    passwordError = password.isBlank()
+
+                    if (allFieldsFilled) {
+                        navController.navigate(Screen.Home.route)
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
+
 
 
 @Preview(showBackground = true)

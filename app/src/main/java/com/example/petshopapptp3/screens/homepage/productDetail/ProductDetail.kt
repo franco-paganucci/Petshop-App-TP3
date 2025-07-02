@@ -119,12 +119,17 @@ fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            StartButton("Add to Cart") {
-                cartViewModel.addProductToCart(product, quantity)
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar("Producto/s agregado/s al carrito")
+            StartButton(
+                text = "Add to Cart",
+                ButtonColor = purple,
+                onClick = {
+                    cartViewModel.addProductToCart(product, quantity)
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Producto/s agregado/s al carrito")
+                    }
                 }
-            }
+            )
+
         }
     }
 }
