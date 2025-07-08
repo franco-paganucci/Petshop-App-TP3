@@ -21,6 +21,7 @@ import com.example.petshopapptp3.components.homePage.cart.CartSummary
 import com.example.petshopapptp3.components.homePage.cart.CartTopBar
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.util.responsiveSizes
 import com.example.petshopapptp3.viewmodel.CartViewModel
 
 @Composable
@@ -28,6 +29,7 @@ fun CartScreen(
     navController: NavController,
     cartViewModel: CartViewModel = hiltViewModel()
 ) {
+    val sizes = responsiveSizes()
     val cartItems by cartViewModel.localCartItems.collectAsState(initial = emptyList())
     val purple = Color(0xFF7B61FF)
 
@@ -35,16 +37,18 @@ fun CartScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp)
+            .padding(sizes.paddingHorizontal)
     ) {
-        ArrowTitle("Cart") { navController.navigate(Screen.Home.route) }
+        ArrowTitle("Cart") {
+            navController.navigate(Screen.Home.route)
+        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
         if (cartItems.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(sizes.spacerHeightLarge)
             ) {
                 items(cartItems) { item ->
                     CartItemCard(item)
@@ -54,7 +58,11 @@ fun CartScreen(
             IconButton(onClick = {
                 cartViewModel.clearEverything()
             }) {
-                Icon(Icons.Default.Delete, contentDescription = "Eliminar carrito", tint = Color.Red)
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Eliminar carrito",
+                    tint = Color.Red
+                )
             }
 
             val total = cartItems.sumOf { it.price * it.quantity }
@@ -73,9 +81,7 @@ fun CartScreen(
                 navController = navController
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
         } else {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text("El carrito está vacío.")
@@ -83,3 +89,4 @@ fun CartScreen(
         }
     }
 }
+

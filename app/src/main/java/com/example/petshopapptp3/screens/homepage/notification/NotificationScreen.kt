@@ -17,11 +17,13 @@ import com.example.petshopapptp3.components.homePage.notification.NotificationDa
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.homePage.notification.NotificationList
 import com.example.petshopapptp3.components.shared.ArrowTitle
+import com.example.petshopapptp3.util.responsiveSizes
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotificationScreen(navController: NavController) {
+    val sizes = responsiveSizes()
     var selectedTab by remember { mutableStateOf(0) }
 
     val tabTitles = listOf("Activity", "Seller Mode")
@@ -41,7 +43,7 @@ fun NotificationScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-            ArrowTitle("Notification"){
+            ArrowTitle("Notification") {
                 navController.popBackStack()
             }
         }
@@ -50,8 +52,11 @@ fun NotificationScreen(navController: NavController) {
 
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-                    .height(40.dp)
+                    .padding(
+                        horizontal = sizes.paddingHorizontal,
+                        vertical = sizes.inputPaddingVertical
+                    )
+                    .height(sizes.buttonHeight)
                     .fillMaxWidth()
                     .background(color = Color(0xFFF1F1F1), shape = MaterialTheme.shapes.large),
                 verticalAlignment = Alignment.CenterVertically
@@ -71,7 +76,8 @@ fun NotificationScreen(navController: NavController) {
                         Text(
                             text = title,
                             color = if (selectedTab == index) Color.White else Color.Gray,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontSize = sizes.buttonFontSize
                         )
                     }
                 }
@@ -79,10 +85,15 @@ fun NotificationScreen(navController: NavController) {
 
             val items = if (selectedTab == 0) activityItems else sellerItems
 
-            LazyColumn(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            LazyColumn(
+                modifier = Modifier.padding(
+                    horizontal = sizes.paddingHorizontal,
+                    vertical = sizes.inputPaddingVertical
+                )
+            ) {
                 items(items) { item ->
                     NotificationList(item)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
                 }
             }
         }
