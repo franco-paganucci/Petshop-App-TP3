@@ -42,8 +42,10 @@ fun ChangePassword(navController: NavController) {
             InputSimple("Abdul")
         }
 
-        StartButton("Change Password", ButtonColor = purple) {
-            navController.navigate(Screen.Login.route)
-        }
+        StartButton(
+            text = "Change Password",
+            ButtonColor = purple,
+            onClick = { navController.navigate(Screen.Login.route) }
+        )
     }
 }

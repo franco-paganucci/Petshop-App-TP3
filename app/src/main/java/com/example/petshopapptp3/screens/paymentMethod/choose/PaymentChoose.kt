@@ -81,9 +81,9 @@ fun PaymentChoose(
                 navController.navigate(Screen.PaymentSuccess.route)
             },
             ButtonColor = purple,
-            fontSize = sizes.buttonFontSize,
-            height = sizes.buttonHeight
         )
+
+        Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
     }
 }
 

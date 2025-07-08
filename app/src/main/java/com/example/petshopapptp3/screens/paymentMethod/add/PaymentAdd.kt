@@ -133,9 +133,8 @@ fun PaymentAdd(navController: NavController, fromSettings: Boolean) {
                     }
                 },
                 ButtonColor = purple,
-                height = sizes.buttonHeight,
-                fontSize = sizes.buttonFontSize
             )
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
         }
     }
 }
