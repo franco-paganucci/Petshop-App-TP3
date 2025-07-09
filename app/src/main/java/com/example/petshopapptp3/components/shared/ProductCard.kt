@@ -17,7 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import coil.compose.AsyncImage
+
 import com.example.petshopapptp3.data.remote.Product
 import com.example.petshopapptp3.ui.theme.cardColor
 

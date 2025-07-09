@@ -11,17 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.paymentMethod.PaymentOptionCard
-import androidx.navigation.NavController
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 import com.example.petshopapptp3.util.responsiveSizes
-import com.example.petshopapptp3.viewmodel.CartViewModel
+import com.example.petshopapptp3.viewModel.CartViewModel
 
 @Composable
 fun PaymentChoose(

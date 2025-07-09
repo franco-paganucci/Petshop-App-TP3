@@ -15,18 +15,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp // Importa sp para fontSize
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+
+import kotlinx.coroutines.launch
+
 import coil.compose.rememberAsyncImagePainter
+
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.data.remote.Product
-import com.example.petshopapptp3.viewmodel.CartViewModel
-import kotlinx.coroutines.launch
-import com.example.petshopapptp3.util.responsiveSizes // Importa tu función responsiveSizes
-import com.example.petshopapptp3.util.ProvideWindowSize // Necesario para que LocalWindowSize funcione
+import com.example.petshopapptp3.viewModel.CartViewModel
+import com.example.petshopapptp3.util.responsiveSizes
 
 @Composable
 fun ProductDetailScreen(
@@ -35,7 +35,7 @@ fun ProductDetailScreen(
     cartViewModel: CartViewModel = hiltViewModel()
 ) {
     val purple = Color(0xFF7B61FF)
-    var quantity by remember { mutableStateOf(1) }
+    var quantity by remember { mutableIntStateOf(1) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     val sizes = responsiveSizes()

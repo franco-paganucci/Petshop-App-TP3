@@ -1,4 +1,4 @@
-package com.example.petshopapptp3.data.remote.cart
+package com.example.petshopapptp3.data.remote
 
 data class AddToCartRequest(
     val userId: Int = 1,

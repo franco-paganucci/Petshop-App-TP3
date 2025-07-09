@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+
 import com.example.petshopapptp3.components.homePage.notification.NotificationData
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.homePage.notification.NotificationList
@@ -24,7 +24,7 @@ import com.example.petshopapptp3.util.responsiveSizes
 @Composable
 fun NotificationScreen(navController: NavController) {
     val sizes = responsiveSizes()
-    var selectedTab by remember { mutableStateOf(0) }
+    var selectedTab by remember { mutableIntStateOf(0) }
 
     val tabTitles = listOf("Activity", "Seller Mode")
 

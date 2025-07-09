@@ -25,7 +25,7 @@ fun CategorySection(purple: Color) {
     val categories = listOf("Food", "Toys", "Accessories")
 
     // Estado del chip seleccionado
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
 
     Column {
         Row(

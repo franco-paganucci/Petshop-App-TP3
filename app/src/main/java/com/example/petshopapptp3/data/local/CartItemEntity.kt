@@ -1,6 +1,5 @@
 package com.example.petshopapptp3.data.local
 
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

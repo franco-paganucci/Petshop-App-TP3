@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.petshopapptp3.viewmodel.ProductViewModel
+import com.example.petshopapptp3.viewModel.ProductViewModel
 import androidx.compose.foundation.lazy.items
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.ProductCard

@@ -1,18 +1,22 @@
-package com.example.petshopapptp3.viewmodel
+package com.example.petshopapptp3.viewModel
+
+import javax.inject.Inject
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.petshopapptp3.data.local.CartItemEntity
-import com.example.petshopapptp3.data.remote.CartResponse
-import com.example.petshopapptp3.data.remote.RetroFitInstance
-import com.example.petshopapptp3.data.remote.cart.AddToCartRequest
-import com.example.petshopapptp3.data.remote.cart.CartProduct
-import com.example.petshopapptp3.repository.CartRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+import com.example.petshopapptp3.data.local.CartItemEntity
+import com.example.petshopapptp3.data.remote.CartResponse
+import com.example.petshopapptp3.data.remote.RetroFitInstance
+import com.example.petshopapptp3.data.remote.AddToCartRequest
+import com.example.petshopapptp3.data.remote.CartProduct
+import com.example.petshopapptp3.repository.CartRepository
 import com.example.petshopapptp3.data.remote.Product
 
 @HiltViewModel

@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
 import androidx.navigation.compose.*
+
 import com.example.petshopapptp3.components.navigationComponents.BottomNavigationBar
 import com.example.petshopapptp3.navigation.NavGraph
 import com.example.petshopapptp3.navigation.Screen
-import androidx.compose.runtime.getValue
+
 
 @Composable
 fun MainScreen() {

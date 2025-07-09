@@ -1,8 +1,8 @@
 package com.example.petshopapptp3.data.remote
 
-import com.example.petshopapptp3.data.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
