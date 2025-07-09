@@ -24,13 +24,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.profile.ModeButton
 import com.example.petshopapptp3.components.profile.StatItem
 import com.example.petshopapptp3.components.profile.FilterChip
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
-import com.example.petshopapptp3.viewmodel.ProductViewModel
+import com.example.petshopapptp3.viewModel.ProductViewModel
 
 @Composable
 fun ProfileScreen(navController: NavController) {

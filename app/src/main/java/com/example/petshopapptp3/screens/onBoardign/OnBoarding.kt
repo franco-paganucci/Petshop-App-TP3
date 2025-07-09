@@ -19,13 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 import com.example.petshopapptp3.util.ProvideWindowSize
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import com.example.petshopapptp3.util.responsiveSizes
 
 

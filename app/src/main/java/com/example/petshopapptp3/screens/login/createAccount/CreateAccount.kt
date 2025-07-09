@@ -18,14 +18,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.*
+import androidx.navigation.NavController
+
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.ui.theme.disableButton
-import androidx.compose.runtime.*
-import androidx.navigation.NavController
 import com.example.petshopapptp3.components.loginComponents.HaveAccount
 import com.example.petshopapptp3.components.shared.ClickableText
 import com.example.petshopapptp3.navigation.Screen

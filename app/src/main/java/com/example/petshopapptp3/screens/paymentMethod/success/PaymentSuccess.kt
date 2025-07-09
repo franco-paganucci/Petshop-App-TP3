@@ -1,6 +1,5 @@
 package com.example.petshopapptp3.screens.paymentMethod.success
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,10 +9,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
@@ -21,7 +19,7 @@ import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
-fun PaymentSucces(navController: NavController) {
+fun PaymentSuccess(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()

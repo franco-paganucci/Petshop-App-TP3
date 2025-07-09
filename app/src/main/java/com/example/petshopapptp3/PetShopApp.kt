@@ -1,9 +1,12 @@
 package com.example.petshopapptp3
 
 import android.app.Application
+
 import androidx.room.Room
-import com.example.petshopapptp3.data.local.AppDatabase
+
 import dagger.hilt.android.HiltAndroidApp
+
+import com.example.petshopapptp3.data.local.AppDatabase
 
 @HiltAndroidApp
 class PetshopApp : Application() {

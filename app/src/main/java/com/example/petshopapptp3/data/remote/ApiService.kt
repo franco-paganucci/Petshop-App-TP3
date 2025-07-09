@@ -1,9 +1,5 @@
-package com.example.petshopapptp3.data
+package com.example.petshopapptp3.data.remote
 
-import com.example.petshopapptp3.data.remote.CartResponse
-import com.example.petshopapptp3.data.remote.ProductResponse
-import com.example.petshopapptp3.data.remote.cart.AddToCartRequest
-import com.example.petshopapptp3.navigation.Screen.Cart
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

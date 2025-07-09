@@ -1,29 +1,22 @@
 package com.example.petshopapptp3.screens.profilePage.settingPage
 
-import android.R.attr.onClick
 import androidx.compose.runtime.Composable
-
-
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
 import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.navigation.Screen
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import com.example.petshopapptp3.components.profile.SettingsRow
 
 @Composable
