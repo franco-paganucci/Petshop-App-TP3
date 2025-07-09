@@ -82,7 +82,7 @@ fun NewPassword(onLoginClick: () -> Unit = { }, navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         StartButton(
-            Text = "Reset Password",
+            text = "Reset Password",
             ButtonColor = buttonColor,
             onClick = {
                 passwordError = password.isBlank()

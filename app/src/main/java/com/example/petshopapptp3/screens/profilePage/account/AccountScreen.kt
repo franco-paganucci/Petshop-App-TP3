@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +31,7 @@ import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
 fun AccountScreen(navController: NavController) {
@@ -42,7 +45,12 @@ fun AccountScreen(navController: NavController) {
             .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column {
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+        ){
             ArrowTitle(Text = "Account") {
                 navController.navigate(Screen.Settings.route)
             }
@@ -107,7 +115,8 @@ fun AccountScreen(navController: NavController) {
         }
 
         StartButton(
-            Text = "Save Changes",
+            text = "Save Changes",
+            ButtonColor = purple,
             onClick = {
                 navController.navigate(Screen.Profile.route)
             }

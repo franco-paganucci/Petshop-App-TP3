@@ -19,6 +19,8 @@ import androidx.navigation.NavController
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.TitleSection
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.responsiveSizes
 import com.example.petshopapptp3.viewmodel.CartViewModel
 
 @Composable
@@ -26,12 +28,13 @@ fun PaymentChoose(
     navController: NavController,
     cartViewModel: CartViewModel
 ) {
+    val sizes = responsiveSizes()
     var selectedMethod by remember { mutableStateOf("Paypal") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 24.dp, vertical = 16.dp)
+            .padding(horizontal = sizes.paddingHorizontal, vertical = sizes.spacerHeightLarge)
     ) {
         Column(
             modifier = Modifier
@@ -42,11 +45,15 @@ fun PaymentChoose(
                 navController.navigate(Screen.PaymentSuccess.route)
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
-            TitleSection("Add New Payment", 16.sp)
+            TitleSection(
+                title = "Add New Payment",
+                fontSize = sizes.titleFontSize,
+                lineHeight = sizes.titleLineHeight
+            )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
             PaymentOptionCard(
                 title = "Paypal",
@@ -55,7 +62,7 @@ fun PaymentChoose(
                 enabled = true
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
             PaymentOptionCard(
                 title = "Bank Transfer",
@@ -65,12 +72,18 @@ fun PaymentChoose(
             )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
-        StartButton("Checkout", onClick = {
-            cartViewModel.clearEverything()
-            navController.navigate(Screen.PaymentSuccess.route)
-        })
+        StartButton(
+            text = "Checkout",
+            onClick = {
+                cartViewModel.clearEverything()
+                navController.navigate(Screen.PaymentSuccess.route)
+            },
+            ButtonColor = purple,
+        )
+
+        Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
     }
-
 }
+

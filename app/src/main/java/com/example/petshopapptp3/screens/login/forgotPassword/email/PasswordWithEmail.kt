@@ -55,7 +55,8 @@ fun PasswordWithEmail(onLoginClick: () -> Unit, navController: NavController) {
                 if (it.isNotBlank()) emailError = false
             },
             isError = emailError,
-            showError = true
+            showError = true,
+            label = "email"
         )
 
         Spacer(modifier = Modifier.height(400.dp))
@@ -63,7 +64,7 @@ fun PasswordWithEmail(onLoginClick: () -> Unit, navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         StartButton(
-            Text = "Next",
+            text = "Next",
             ButtonColor = buttonColor,
             onClick = {
                 emailError = email.isBlank()

@@ -28,7 +28,6 @@ import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.profile.ModeButton
 import com.example.petshopapptp3.components.profile.StatItem
 import com.example.petshopapptp3.components.profile.FilterChip
-import com.example.petshopapptp3.components.shared.ClickeableText
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewmodel.ProductViewModel

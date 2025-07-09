@@ -22,6 +22,8 @@ import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.navigation.Screen
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import com.example.petshopapptp3.components.profile.SettingsRow
 
 @Composable
@@ -37,7 +39,11 @@ fun SettingsScreen(navController: NavController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column {
+        Column (
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ){
             ArrowTitle("Settings Page") {
                 navController.navigate(Screen.Profile.route)
             }

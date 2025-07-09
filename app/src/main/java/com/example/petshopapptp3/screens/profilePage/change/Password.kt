@@ -15,6 +15,7 @@ import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputSimple
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.ui.theme.purple
 import java.nio.file.WatchEvent
 
 @Composable
@@ -41,8 +42,10 @@ fun ChangePassword(navController: NavController) {
             InputSimple("Abdul")
         }
 
-        StartButton("Change Password") {
-            navController.navigate(Screen.Login.route)
-        }
+        StartButton(
+            text = "Change Password",
+            ButtonColor = purple,
+            onClick = { navController.navigate(Screen.Login.route) }
+        )
     }
 }

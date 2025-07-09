@@ -1,6 +1,5 @@
 package com.example.petshopapptp3.components.loginComponents
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.petshopapptp3.R
-import com.example.petshopapptp3.components.shared.ClickeableText
+import com.example.petshopapptp3.components.shared.ClickableText
 
 @Composable
 fun BottomText(onClick: () -> Unit) {
@@ -26,6 +25,6 @@ fun BottomText(onClick: () -> Unit) {
             style = MaterialTheme.typography.bodySmall
         )
         Spacer(modifier = Modifier.width(4.dp))
-        ClickeableText(stringResource(R.string.login_bottomClickeable),onClick = onClick)
+        ClickableText(stringResource(R.string.login_bottomClickeable),onClick = onClick)
     }
 }

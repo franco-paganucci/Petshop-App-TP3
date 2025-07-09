@@ -1,9 +1,10 @@
 package com.example.petshopapptp3.screens.homepage.productDetail
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Add
@@ -15,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.sp // Importa sp para fontSize
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -24,7 +25,8 @@ import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.data.remote.Product
 import com.example.petshopapptp3.viewmodel.CartViewModel
 import kotlinx.coroutines.launch
-
+import com.example.petshopapptp3.util.responsiveSizes // Importa tu función responsiveSizes
+import com.example.petshopapptp3.util.ProvideWindowSize // Necesario para que LocalWindowSize funcione
 
 @Composable
 fun ProductDetailScreen(
@@ -36,6 +38,7 @@ fun ProductDetailScreen(
     var quantity by remember { mutableStateOf(1) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val sizes = responsiveSizes()
 
     Scaffold(
         snackbarHost = {
@@ -46,8 +49,9 @@ fun ProductDetailScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
-                .padding(paddingValues)
-                .padding(16.dp)
+                .padding(horizontal = sizes.paddingHorizontal)
+                .padding(top = paddingValues.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding())
+                .verticalScroll(rememberScrollState())
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -60,40 +64,40 @@ fun ProductDetailScreen(
                 Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = null)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
+                    .height(sizes.imageSize)
                     .background(Color(0xFFF6F6F6)),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(product.thumbnail),
                     contentDescription = product.title,
-                    modifier = Modifier.size(160.dp)
+                    modifier = Modifier.size(sizes.imageSize)
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
             Text(
                 text = product.title,
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                fontSize = sizes.titleFontSize
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge / 2))
 
             Text(
                 text = product.description,
                 color = Color.Gray,
-                fontSize = 14.sp,
-                lineHeight = 20.sp
+                fontSize = sizes.subtitleFontSize,
+                lineHeight = sizes.subtitleLineHeight
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -104,7 +108,11 @@ fun ProductDetailScreen(
                     IconButton(onClick = { if (quantity > 1) quantity-- }) {
                         Icon(Icons.Default.Delete, contentDescription = "Decrease")
                     }
-                    Text(text = quantity.toString(), fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                    Text(
+                        text = quantity.toString(),
+                        fontSize = sizes.subtitleFont,
+                        fontWeight = FontWeight.Medium
+                    )
                     IconButton(onClick = { quantity++ }) {
                         Icon(Icons.Default.Add, contentDescription = "Increase")
                     }
@@ -112,21 +120,24 @@ fun ProductDetailScreen(
 
                 Text(
                     text = "$${product.price}",
-                    fontSize = 20.sp,
+                    fontSize = sizes.titleFontSize,
                     fontWeight = FontWeight.Bold
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
-            StartButton("Add to Cart") {
-                cartViewModel.addProductToCart(product, quantity)
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar("Producto/s agregado/s al carrito")
+            StartButton(
+                text = "Add to Cart",
+                ButtonColor = purple,
+                modifier = Modifier.height(sizes.buttonHeight),
+                onClick = {
+                    cartViewModel.addProductToCart(product, quantity)
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Producto/s agregado/s al carrito")
+                    }
                 }
-            }
+            )
         }
     }
 }
-
-

@@ -6,15 +6,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun PaymentTitle (Text: String){
+fun PaymentTitle(
+    title: String,
+    fontSize: TextUnit = 20.sp,
+    lineHeight: TextUnit = 24.sp
+) {
     Text(
-        text = Text,
-        fontSize = 30.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.Black
+        text = title,
+        fontSize = fontSize,
+        lineHeight = lineHeight,
+        fontWeight = FontWeight.SemiBold
     )
 }

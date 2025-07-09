@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.petshopapptp3.components.shared.ClickeableText
+import com.example.petshopapptp3.components.shared.ClickableText
 
 @Composable
 fun HaveAccount(onLoginClick: () -> Unit) {
@@ -23,6 +23,6 @@ fun HaveAccount(onLoginClick: () -> Unit) {
             style = MaterialTheme.typography.bodySmall
         )
         Spacer(modifier = Modifier.width(4.dp))
-        ClickeableText("Login", onClick = onLoginClick)
+        ClickableText("Login", onClick = onLoginClick)
     }
 }

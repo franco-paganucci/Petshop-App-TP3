@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +16,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -26,57 +23,70 @@ import com.example.petshopapptp3.R
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.ProvideWindowSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import com.example.petshopapptp3.util.responsiveSizes
+
 
 @Composable
 fun OnBoarding(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
-            .padding(horizontal = 16.dp, vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    ProvideWindowSize {
+        val sizes = responsiveSizes()
+        val scrollState = rememberScrollState()
 
-        Text(
-            style = MaterialTheme.typography.bodyLarge,
-            text = stringResource(R.string.onBoarding_Title),
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 32.dp)
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Image(
-            painter = painterResource(id = R.drawable.illustration),
-            contentDescription = "Illustration",
+        Column(
             modifier = Modifier
-                .size(350.dp)
-                .padding(top = 24.dp)
-        )
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = stringResource(R.string.onBoarding_Title),
+                fontSize = sizes.titleFontSize,
+                lineHeight = sizes.titleLineHeight,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                modifier = Modifier.padding(top = sizes.paddingTop)
+            )
 
-        Text(
-            style = MaterialTheme.typography.bodyLarge,
-            text = stringResource(R.string.onBoarding_Subtitle),
-            fontSize = 14.sp,
-            lineHeight = 14.sp,
-            color = Color.Gray,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 24.dp)
-        )
+            Spacer(modifier = Modifier.height(12.dp))
 
-        Spacer(modifier = Modifier.height(12.dp))
+            Image(
+                painter = painterResource(id = R.drawable.illustration),
+                contentDescription = "Illustration",
+                modifier = Modifier
+                    .size(sizes.imageSize)
+                    .padding(top = sizes.paddingTop)
+            )
 
-        Text(
-            text = "● ○ ○",
-            fontSize = 18.sp,
-            color = purple,
-            modifier = Modifier.padding(top = 24.dp)
-        )
+            Spacer(modifier = Modifier.height(12.dp))
 
-        StartButton(onClick = {navController.navigate(Screen.Login.route)})
+            Text(
+                text = stringResource(R.string.onBoarding_Subtitle),
+                fontSize = sizes.subtitleFontSize,
+                lineHeight = sizes.subtitleLineHeight,
+                color = Color.Gray,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(top = sizes.paddingTop)
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "● ○ ○",
+                fontSize = 18.sp,
+                color = purple,
+                modifier = Modifier.padding(top = sizes.paddingTop)
+            )
+
+            StartButton(
+                onClick = { navController.navigate(Screen.Login.route) },
+                text = "Get Started",
+                ButtonColor = purple
+                )
+        }
     }
 }
