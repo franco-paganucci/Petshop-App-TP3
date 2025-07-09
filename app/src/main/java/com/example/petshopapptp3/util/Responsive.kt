@@ -16,7 +16,7 @@ fun ProvideWindowSize(content: @Composable () -> Unit) {
     BoxWithConstraints {
         val sizeClass = when {
             maxWidth < 360.dp -> WindowSize.SMALL
-            maxWidth < 600.dp -> WindowSize.MEDIUM
+            maxWidth < 390.dp -> WindowSize.MEDIUM
             else -> WindowSize.LARGE
         }
 
