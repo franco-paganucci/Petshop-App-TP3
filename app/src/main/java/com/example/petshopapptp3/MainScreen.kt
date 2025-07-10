@@ -6,6 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.*
 
 import com.example.petshopapptp3.components.navigationComponents.BottomNavigationBar
@@ -49,6 +50,7 @@ fun MainScreen() {
     val showBottomBar = currentRoute !in hideBottomBarRoutes
 
     Scaffold(
+        containerColor = Color.White,
         bottomBar = {
             if (showBottomBar) {
                 BottomNavigationBar(navController = navController)

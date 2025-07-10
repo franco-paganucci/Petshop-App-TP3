@@ -30,7 +30,6 @@ fun ProductRow(
             ProductCard(
                 product = product,
                 purple = purple,
-                gray = gray,
                 modifier = Modifier.weight(1f),
                 onClick = {
                     navController.navigate(Screen.ProductDetail.createRoute(product.id))

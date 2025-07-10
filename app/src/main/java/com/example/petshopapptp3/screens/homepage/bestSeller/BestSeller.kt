@@ -51,7 +51,6 @@ fun BestSellerScreen(navController: NavController) {
                     ProductCard(
                         product = product,
                         purple = purple,
-                        gray = gray,
                         modifier = Modifier.weight(1f),
                         onClick = {
                             navController.navigate(Screen.ProductDetail.createRoute(product.id))

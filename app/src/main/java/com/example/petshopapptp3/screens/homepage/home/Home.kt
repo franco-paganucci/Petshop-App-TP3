@@ -44,7 +44,7 @@ fun HomeScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item { HomeTopBar(navController, onLocationClick = { showLocationModal = true }) }
-        item { PromoCard(purple) }
+        item { PromoCard() }
         item { CategorySection(purple) }
         item { BestSellerHeader(purple) {
             navController.navigate(Screen.BestSeller.route)

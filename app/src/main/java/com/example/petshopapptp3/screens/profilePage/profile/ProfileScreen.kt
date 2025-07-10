@@ -49,9 +49,8 @@ fun ProfileScreen(navController: NavController) {
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .systemBarsPadding()
-                .padding(16.dp),
+                .fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
