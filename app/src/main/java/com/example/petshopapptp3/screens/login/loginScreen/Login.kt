@@ -3,6 +3,7 @@ package com.example.petshopapptp3.screens.login.loginScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -58,10 +59,13 @@ fun LoginScreen(navController: NavController) {
 
             TitleSection(
                 title = stringResource(R.string.login_Title),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.Start),
                 fontSize = sizes.titleFontSize,
                 lineHeight = sizes.titleLineHeight
             )
-
+            
             Spacer(modifier = Modifier.height(16.dp))
 
             SubtitleSection(
