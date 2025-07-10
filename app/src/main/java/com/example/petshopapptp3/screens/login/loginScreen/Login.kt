@@ -111,15 +111,18 @@ fun LoginScreen(navController: NavController) {
             DividerWithOr()
             Spacer(modifier = Modifier.height(5.dp))
             SocialButtons()
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             ClickableText("Forgot Your Password?", onClick = {
                 navController.navigate(Screen.ForgotPasswordEmail.route)
             })
-            Spacer(modifier = Modifier.height(5.dp))
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             BottomText(onClick = {
                 navController.navigate(Screen.CreateAccount.route)
             })
-            Spacer(modifier = Modifier.height(10.dp))
+
+            Spacer(modifier = Modifier.height(sizes.loginBottomSpacing))
 
             StartButton(
                 ButtonColor = buttonColor,

@@ -23,8 +23,6 @@ import com.example.petshopapptp3.R
 fun CategorySection(purple: Color) {
     val gray = Color(0xFFF6F6F6)
     val categories = listOf("Food", "Toys", "Accessories")
-
-    // Estado del chip seleccionado
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     Column {
@@ -40,14 +38,14 @@ fun CategorySection(purple: Color) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(18.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Ícono no seleccionable
+            // Ícono
             Box(
                 modifier = Modifier
                     .height(40.dp)
-                    .widthIn(min = 48.dp)
+                    .width(48.dp)
                     .background(gray, RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
@@ -63,13 +61,13 @@ fun CategorySection(purple: Color) {
                 val isSelected = selectedIndex == index
                 Box(
                     modifier = Modifier
-                        .height(40.dp)
+                        .height(46.dp)
                         .background(
                             color = if (isSelected) purple else gray,
                             shape = RoundedCornerShape(16.dp)
                         )
                         .clickable { selectedIndex = index }
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 16.dp, vertical = 1.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -82,6 +80,7 @@ fun CategorySection(purple: Color) {
         }
     }
 }
+
 
 
 

@@ -33,11 +33,11 @@ fun HomeTopBar(navController: NavController,
         Column (
             modifier = Modifier.clickable { onLocationClick() }
         ) {
-            Text("Location", fontSize = 12.sp, color = Color.Gray)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Jebres, Surakarta", fontWeight = FontWeight.Bold)
+                Text("Location", fontSize = 12.sp, color = Color.Gray)
                 Icon(Icons.Default.ArrowDropDown, contentDescription = null)
             }
+            Text("Jebres, Surakarta", fontWeight = FontWeight.Bold)
         }
         Row {
             IconButton(onClick = {navController.navigate(Screen.Search.route)}) {

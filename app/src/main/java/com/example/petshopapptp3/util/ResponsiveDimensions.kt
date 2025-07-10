@@ -28,6 +28,17 @@ data class ResponsiveSizes(
     val socialButtonHeight: Dp,
     val socialButtonIconSize: Dp,
     val socialButtonPaddingHorizontal: Dp,
+
+    val promoCardHeight: Dp,
+    val promoProductSize: Dp,
+    val promoProductOffsetX: Dp,
+    val promoProductOffsetY: Dp,
+    val promoTitleFontSize: TextUnit,
+    val promoSubtitleFontSize: TextUnit,
+    val promoLineHeightTitle: TextUnit,
+    val promoLineHeightSubtitle: TextUnit,
+
+    val loginBottomSpacing: Dp
 )
 
 @Composable
@@ -51,7 +62,16 @@ fun responsiveSizes(): ResponsiveSizes {
             socialButtonHeight = 40.dp,
             socialButtonIconSize = 16.dp,
             socialButtonPaddingHorizontal = 4.dp,
-        )
+            promoCardHeight = 120.dp,
+            promoProductSize = 160.dp,
+            promoProductOffsetX = (-36).dp,
+            promoProductOffsetY = (-32).dp,
+            promoTitleFontSize = 14.sp,
+            promoSubtitleFontSize = 12.sp,
+            promoLineHeightTitle = 16.sp,
+            promoLineHeightSubtitle = 14.sp,
+            loginBottomSpacing = 30.dp
+            )
 
         WindowSize.MEDIUM -> ResponsiveSizes(
             titleFontSize = 20.sp,
@@ -71,7 +91,16 @@ fun responsiveSizes(): ResponsiveSizes {
             socialButtonHeight = 56.dp,
             socialButtonIconSize = 20.dp,
             socialButtonPaddingHorizontal = 8.dp,
-        )
+            promoCardHeight = 140.dp,
+            promoProductSize = 180.dp,
+            promoProductOffsetX = 0.dp,
+            promoProductOffsetY = 0.dp,
+            promoTitleFontSize = 16.sp,
+            promoSubtitleFontSize = 14.sp,
+            promoLineHeightTitle = 18.sp,
+            promoLineHeightSubtitle = 16.sp,
+            loginBottomSpacing = 50.dp
+            )
 
         WindowSize.LARGE -> ResponsiveSizes(
             titleFontSize = 36.sp,
@@ -91,6 +120,15 @@ fun responsiveSizes(): ResponsiveSizes {
             socialButtonHeight = 64.dp,
             socialButtonIconSize = 24.dp,
             socialButtonPaddingHorizontal = 12.dp,
-        )
+            promoCardHeight = 180.dp,
+            promoProductSize = 200.dp,
+            promoProductOffsetX = (-48).dp,
+            promoProductOffsetY = (-44).dp,
+            promoTitleFontSize = 18.sp,
+            promoSubtitleFontSize = 16.sp,
+            promoLineHeightTitle = 20.sp,
+            promoLineHeightSubtitle = 18.sp,
+            loginBottomSpacing = 80.dp
+            )
     }
 }
