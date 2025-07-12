@@ -7,9 +7,17 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
+    // Auth
+    @POST("auth/login")
+    suspend fun loginUser(
+        @Body loginRequest: LoginRequest
+    ): LoginResponse
+
+    // Products
     @GET("products")
     suspend fun getProducts(): ProductResponse
 
+    // Carts
     @GET("carts/1")
     suspend fun getCart(): CartResponse
 

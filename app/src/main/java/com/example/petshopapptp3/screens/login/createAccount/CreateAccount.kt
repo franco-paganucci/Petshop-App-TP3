@@ -1,5 +1,6 @@
 package com.example.petshopapptp3.screens.login.createAccount
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+
+import com.google.firebase.auth.FirebaseUser
 
 import com.example.petshopapptp3.components.shared.SubtitleSection
 import com.example.petshopapptp3.components.shared.TitleSection
@@ -33,11 +41,12 @@ import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 import com.example.petshopapptp3.util.ProvideWindowSize
 import com.example.petshopapptp3.util.responsiveSizes
-
+import com.example.petshopapptp3.viewModel.AuthViewModel
 
 @Composable
 fun CreateAccount(
-    navController: NavController
+    navController: NavController,
+    viewModel: AuthViewModel = hiltViewModel()
 ) {
     ProvideWindowSize {
         val sizes = responsiveSizes()
@@ -54,6 +63,29 @@ fun CreateAccount(
         val allFieldsValid =
             fullName.isNotBlank() && email.isNotBlank() && password.isNotBlank() && checked
         val buttonColor = if (allFieldsValid) purple else disableButton
+
+        var isLoading by remember { mutableStateOf(false) }
+        val context = LocalContext.current
+
+        val authState by viewModel.authState.collectAsState()
+        var registrationError by remember { mutableStateOf<String?>(null) }
+
+        // Reacción al resultado del registro
+        LaunchedEffect(authState) {
+            authState?.let { result ->
+                isLoading = false
+                if (result.isSuccess) {
+                    Toast.makeText(context, "Cuenta creada con éxito", Toast.LENGTH_SHORT).show()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.CreateAccount.route) { inclusive = true }
+                    }
+                    viewModel.clearState()
+                } else {
+                    registrationError = result.exceptionOrNull()?.localizedMessage ?: "Error desconocido"
+                    viewModel.clearState()
+                }
+            }
+        }
 
         Column(
             modifier = Modifier
@@ -125,48 +157,50 @@ fun CreateAccount(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Checkbox(checked = checked, onCheckedChange = { checked = it })
-                Text(
-                    "I Agree to the ",
-                    fontSize = sizes.subtitleFontSize
-                )
-                ClickableText(
-                    "Terms of service ",
-                    onClick = { /* TODO: handle terms click */ },
-                )
-                Text(
-                    "and ",
-                    fontSize = sizes.subtitleFontSize
-                )
-                ClickableText(
-                    "Privacy Policy",
-                    onClick = { /* TODO: handle privacy click */ },
-                )
+                Text("I Agree to the ", fontSize = sizes.subtitleFontSize)
+                ClickableText("Terms of service ", onClick = { /* TODO */ })
+                Text("and ", fontSize = sizes.subtitleFontSize)
+                ClickableText("Privacy Policy", onClick = { /* TODO */ })
             }
 
             Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
-            HaveAccount(onLoginClick = {
+            HaveAccount {
                 navController.navigate(Screen.Login.route)
-            })
+            }
 
             Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
-            StartButton(
-                text = "Create Account",
-                ButtonColor = buttonColor,
-                onClick = {
-                    fullNameError = fullName.isBlank()
-                    emailError = email.isBlank()
-                    passwordError = password.isBlank()
+            if (isLoading) {
+                CircularProgressIndicator()
+                Spacer(modifier = Modifier.height(16.dp))
+            } else {
+                StartButton(
+                    text = "Create Account",
+                    ButtonColor = buttonColor,
+                    onClick = {
+                        fullNameError = fullName.isBlank()
+                        emailError = email.isBlank()
+                        passwordError = password.isBlank()
 
-                    if (allFieldsValid) {
-                        navController.navigate(Screen.Login.route)
+                        val valid = !fullNameError && !emailError && !passwordError && checked
+                        if (valid) {
+                            isLoading = true
+                            registrationError = null
+                            viewModel.register(email, password, fullName)
+                        }
                     }
-                }
-            )
+                )
+            }
+
+            registrationError?.let {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("❌ $it", color = Color.Red)
+            }
         }
     }
 }
+
 
 
 

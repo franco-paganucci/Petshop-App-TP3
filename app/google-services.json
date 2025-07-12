@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433838616736",
+    "project_id": "petshop-app-tp3",
+    "storage_bucket": "petshop-app-tp3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433838616736:android:5c731b0049c27c7b1e19c5",
+        "android_client_info": {
+          "package_name": "com.example.petshopapptp3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0E4nojOnAaYR7tVaWUYK6ETZBzklwvXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
