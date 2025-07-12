@@ -1,23 +1,16 @@
 package com.example.petshopapptp3.screens.profilePage.account
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,71 +42,88 @@ fun AccountScreen(
     val updateState by viewModel.updateState.collectAsState()
 
     var showMessage by remember { mutableStateOf<String?>(null) }
+    var isLoading by remember { mutableStateOf(true) } // Initialize to true for initial load
 
-    // cargar perfil al entrar a la vista
+    // Cargar perfil al entrar a la vista
     LaunchedEffect(Unit) {
         viewModel.loadUserProfile()
     }
 
-    // si se cargaron datos, mostrarlos
+    // Cuando se carga perfil con éxito, setear valores
     LaunchedEffect(profileState) {
-        profileState?.onSuccess {
-            name = it.fullName
-            email = it.email
+        profileState?.let { result ->
+            if (result.isSuccess) {
+                val profile = result.getOrNull()
+                if (profile != null) {
+                    name = profile.fullName
+                    email = profile.email
+                    showMessage = null
+                }
+                isLoading = false
+            } else if (result.isFailure) {
+                showMessage = "Error al cargar perfil: ${result.exceptionOrNull()?.localizedMessage ?: "desconocido"}"
+                isLoading = false
+            }
         }
     }
 
+    // Cuando se actualiza perfil, mostrar mensaje y manejar loading
     LaunchedEffect(updateState) {
         updateState?.let { result ->
+            isLoading = false
             if (result.isSuccess) {
                 showMessage = "Perfil actualizado correctamente"
             } else {
-                showMessage = "Error: ${result.exceptionOrNull()?.localizedMessage ?: "desconocido"}"
+                showMessage = "Error al actualizar perfil: ${result.exceptionOrNull()?.localizedMessage ?: "desconocido"}"
             }
         }
     }
 
     Column(
         modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column (
+        Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+                .weight(1f)
                 .verticalScroll(rememberScrollState())
-        ){
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             ArrowTitle(Text = "Account") {
                 navController.navigate(Screen.Settings.route)
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(220.dp)
                     .clip(RoundedCornerShape(20.dp))
+                    .background(Color.LightGray)
             ) {
-                val yOffset = 50.dp
-
                 Image(
                     painter = painterResource(id = R.drawable.fondo_avatar),
                     contentDescription = "Fondo decorativo",
                     modifier = Modifier
-                        .matchParentSize()
-                        .offset(y = yOffset)
-                        .clip(RoundedCornerShape(20.dp)),
+                        .matchParentSize(),
                     contentScale = ContentScale.Crop,
                 )
 
+                // --- Background Image Edit Icon (floating) ---
                 IconButton(
-                    onClick = { /* Edit background */ },
-                    modifier = Modifier.align(Alignment.TopEnd)
+                    onClick = { /* TODO: Edit background */ },
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(8.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.edit),
-                        contentDescription = "Editar fondo"
+                        contentDescription = "Edit background image",
+                        tint = Color.White
                     )
                 }
 
@@ -123,16 +133,39 @@ fun AccountScreen(
                         .offset(y = 40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.avatar4),
-                        contentDescription = "Avatar",
+                    // --- Avatar Image and Edit Icon (floating) ---
+                    Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(100))
-                            .height(80.dp)
-                    )
+                            .size(80.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.avatar4),
+                            contentDescription = "Avatar",
+                            modifier = Modifier
+                                .matchParentSize()
+                                .clip(RoundedCornerShape(100))
+                                .background(Color.Gray),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        // Edit Icon for Avatar
+                        IconButton(
+                            onClick = { /* TODO: Edit avatar */ },
+                            modifier = Modifier
+                                .align(Alignment.BottomEnd)
+                                .offset(x = 12.dp, y = 12.dp)
+                                .size(32.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.edit),
+                                contentDescription = "Edit avatar",
+                                tint = purple
+                            )
+                        }
+                    }
 
                     Text(
-                        text = "Abduldul",
+                        text = name.ifBlank { "Abduldul" },
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(top = 8.dp)
                     )
@@ -144,18 +177,35 @@ fun AccountScreen(
             InputField(label = "Name", value = name, onValueChange = { name = it })
             Spacer(modifier = Modifier.height(12.dp))
             InputField(label = "Email", value = email, onValueChange = { email = it })
+
+            showMessage?.let { message ->
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = message,
+                    color = if (updateState?.isSuccess == true) Color.Green else Color.Red,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
 
-        StartButton(
-            text = "Save Changes",
-            ButtonColor = purple,
-            onClick = {
-                viewModel.updateUserProfile(name, email)
-            }
-        )
-        showMessage?.let { message ->
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = message, color = if (updateState?.isSuccess == true) Color.Green else Color.Red)
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.padding(bottom = 16.dp))
+        } else {
+            StartButton(
+                text = "Save Changes",
+                ButtonColor = purple,
+                onClick = {
+                    showMessage = null
+                    isLoading = true
+                    viewModel.updateUserProfile(name, email)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            )
         }
     }
 }
