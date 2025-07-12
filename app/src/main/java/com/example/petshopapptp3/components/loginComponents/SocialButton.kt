@@ -2,6 +2,7 @@ package com.example.petshopapptp3.components.loginComponents
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,17 +24,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 
 import com.example.petshopapptp3.R
+import com.example.petshopapptp3.util.LocalWindowSize
+import com.example.petshopapptp3.util.WindowSize
+import com.example.petshopapptp3.util.responsiveSizes
 
 @Composable
 fun SocialButtons() {
+    val sizes = responsiveSizes()
+    val isCompact = LocalWindowSize.current == WindowSize.SMALL
+
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = if (isCompact) Arrangement.SpaceEvenly else Arrangement.spacedBy(12.dp)
     ) {
-        SocialButton(text = "Google", icon = painterResource(id = R.drawable.google_icon))
-        SocialButton(text = "facebook", icon = painterResource(id = R.drawable.facebook_icon))
+        SocialButton(
+            text = if (isCompact) "" else "Google",
+            icon = painterResource(id = R.drawable.google_icon),
+            height = sizes.socialButtonHeight,
+            iconSize = sizes.socialButtonIconSize,
+            paddingHorizontal = sizes.socialButtonPaddingHorizontal
+        )
+        SocialButton(
+            text = if (isCompact) "" else "Facebook",
+            icon = painterResource(id = R.drawable.facebook_icon),
+            height = sizes.socialButtonHeight,
+            iconSize = sizes.socialButtonIconSize,
+            paddingHorizontal = sizes.socialButtonPaddingHorizontal
+        )
     }
 }
+
 
 @Composable
 fun SocialButton(
@@ -51,7 +71,8 @@ fun SocialButton(
             .padding(horizontal = paddingHorizontal),
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, Color.LightGray),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
+        contentPadding = PaddingValues(horizontal = 12.dp)
     ) {
         Icon(
             painter = icon,
@@ -59,7 +80,10 @@ fun SocialButton(
             modifier = Modifier.size(iconSize),
             tint = Color.Unspecified
         )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(text)
+        if (text.isNotEmpty()) {
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text)
+        }
     }
 }
+
