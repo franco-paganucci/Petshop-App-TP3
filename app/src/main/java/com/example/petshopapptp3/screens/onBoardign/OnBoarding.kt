@@ -1,6 +1,7 @@
 package com.example.petshopapptp3.screens.onBoardign
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,58 +37,61 @@ fun OnBoarding(navController: NavController) {
         val sizes = responsiveSizes()
         val scrollState = rememberScrollState()
 
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 24.dp)
         ) {
-
-            Text(
-                text = stringResource(R.string.onBoarding_Title),
-                fontSize = sizes.titleFontSize,
-                lineHeight = sizes.titleLineHeight,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.padding(top = sizes.paddingTop)
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.illustration),
-                contentDescription = "Illustration",
+            Column(
                 modifier = Modifier
-                    .size(sizes.imageSize)
-                    .padding(top = sizes.paddingTop)
-            )
+                    .align(Alignment.Center)
+                    .verticalScroll(scrollState),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(R.string.onBoarding_Title),
+                    fontSize = sizes.titleFontSize,
+                    lineHeight = sizes.titleLineHeight,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center
+                )
 
-            Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = stringResource(R.string.onBoarding_Subtitle),
-                fontSize = sizes.subtitleFontSize,
-                lineHeight = sizes.subtitleLineHeight,
-                color = Color.Gray,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = sizes.paddingTop)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.illustration),
+                    contentDescription = "Illustration",
+                    modifier = Modifier.size(sizes.imageSize)
+                )
 
-            Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = "● ○ ○",
-                fontSize = 18.sp,
-                color = purple,
-                modifier = Modifier.padding(top = sizes.paddingTop)
-            )
+                Text(
+                    text = stringResource(R.string.onBoarding_Subtitle),
+                    fontSize = sizes.subtitleFontSize,
+                    lineHeight = sizes.subtitleLineHeight,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Text(
+                    text = "● ○ ○",
+                    fontSize = 18.sp,
+                    color = purple
+                )
+            }
 
             StartButton(
                 onClick = { navController.navigate(Screen.Login.route) },
                 text = "Get Started",
-                ButtonColor = purple
-                )
+                ButtonColor = purple,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 32.dp)
+            )
         }
     }
 }

@@ -14,10 +14,11 @@ val LocalWindowSize = compositionLocalOf { WindowSize.MEDIUM }
 fun ProvideWindowSize(content: @Composable () -> Unit) {
     BoxWithConstraints {
         val sizeClass = when {
-            maxWidth < 360.dp -> WindowSize.SMALL
-            maxWidth < 390.dp -> WindowSize.MEDIUM
-            else -> WindowSize.LARGE
+            maxWidth < 400.dp -> WindowSize.SMALL       // Teléfonos compactos
+            maxWidth < 600.dp -> WindowSize.MEDIUM      // Teléfonos regulares / grandes
+            else -> WindowSize.LARGE                    // Tablets o pantallas grandes
         }
+
 
         CompositionLocalProvider(LocalWindowSize provides sizeClass) {
             content()
