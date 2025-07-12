@@ -22,9 +22,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
 import com.example.petshopapptp3.R
@@ -33,12 +35,43 @@ import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.viewModel.AuthViewModel
 
 @Composable
-fun AccountScreen(navController: NavController) {
-    var name by remember { mutableStateOf("Abdul") }
-    var username by remember { mutableStateOf("Abdul") }
-    var email by remember { mutableStateOf("Abdul") }
+fun AccountScreen(
+    navController: NavController,
+    viewModel: AuthViewModel = hiltViewModel()
+) {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+
+    val profileState by viewModel.userProfile.collectAsState()
+    val updateState by viewModel.updateState.collectAsState()
+
+    var showMessage by remember { mutableStateOf<String?>(null) }
+
+    // cargar perfil al entrar a la vista
+    LaunchedEffect(Unit) {
+        viewModel.loadUserProfile()
+    }
+
+    // si se cargaron datos, mostrarlos
+    LaunchedEffect(profileState) {
+        profileState?.onSuccess {
+            name = it.fullName
+            email = it.email
+        }
+    }
+
+    LaunchedEffect(updateState) {
+        updateState?.let { result ->
+            if (result.isSuccess) {
+                showMessage = "Perfil actualizado correctamente"
+            } else {
+                showMessage = "Error: ${result.exceptionOrNull()?.localizedMessage ?: "desconocido"}"
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -110,8 +143,6 @@ fun AccountScreen(navController: NavController) {
 
             InputField(label = "Name", value = name, onValueChange = { name = it })
             Spacer(modifier = Modifier.height(12.dp))
-            InputField(label = "Username", value = username, onValueChange = { username = it })
-            Spacer(modifier = Modifier.height(12.dp))
             InputField(label = "Email", value = email, onValueChange = { email = it })
         }
 
@@ -119,8 +150,12 @@ fun AccountScreen(navController: NavController) {
             text = "Save Changes",
             ButtonColor = purple,
             onClick = {
-                navController.navigate(Screen.Profile.route)
+                viewModel.updateUserProfile(name, email)
             }
         )
+        showMessage?.let { message ->
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = message, color = if (updateState?.isSuccess == true) Color.Green else Color.Red)
+        }
     }
 }
