@@ -40,49 +40,44 @@ import com.example.petshopapptp3.viewModel.CartViewModel
 import com.example.petshopapptp3.viewModel.ProductViewModel
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(
+    navController: NavHostController,
+    cartViewModel: CartViewModel = hiltViewModel()
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.OnBoarding.route)
-    {
+        startDestination = Screen.OnBoarding.route
+    ) {
         composable(Screen.Login.route) {
             LoginScreen(navController)
         }
         composable(Screen.CreateAccount.route) {
-            var isChecked by remember { mutableStateOf(false) }
-
-            CreateAccount(
-                navController = navController,
-            )
+            CreateAccount(navController = navController)
         }
-        composable (Screen.OnBoarding.route) { OnBoarding(navController) }
-        composable(Screen.Home.route) { HomeScreen(navController) }
-        composable(Screen.Cart.route) { CartScreen(navController) }
-        composable(Screen.Profile.route) { ProfileScreen(navController) }
+        composable(Screen.OnBoarding.route) { OnBoarding(navController) }
+        composable(Screen.Home.route) { HomeScreen(navController, cartViewModel) }
+        composable(Screen.Cart.route) { CartScreen(navController, cartViewModel) }
+        composable(Screen.Profile.route) { ProfileScreen(navController, cartViewModel) }
         composable(Screen.BestSeller.route) { BestSellerScreen(navController) }
         composable(Screen.Notification.route) { NotificationScreen(navController) }
         composable(Screen.Search.route) { SearchScreen(navController) }
         composable(
             route = "payment_add/{fromSettings}",
-            arguments = listOf(
-                navArgument("fromSettings") { type = NavType.StringType }
-            )
+            arguments = listOf(navArgument("fromSettings") { type = NavType.StringType })
         ) { backStackEntry ->
             val fromSettingsString = backStackEntry.arguments?.getString("fromSettings") ?: "false"
             val fromSettings = fromSettingsString.toBooleanStrictOrNull() ?: false
             PaymentAdd(navController, fromSettings)
         }
-
         composable(Screen.PaymentChoose.route) {
-            val cartViewModel: CartViewModel = hiltViewModel()
             PaymentChoose(navController, cartViewModel)
         }
-        composable (Screen.PaymentSuccess.route){ PaymentSuccess(navController) }
-        composable (Screen.NewPassword.route) { NewPassword({},navController) }
-        composable (Screen.ForgotPasswordEmail.route) { PasswordWithEmail({},navController) }
-        composable (Screen.Settings.route) { SettingsScreen(navController) }
-        composable (Screen.Account.route){ AccountScreen(navController) }
-        composable(Screen.SettingNotifications.route){ SettingNotificationsScreen(navController) }
+        composable(Screen.PaymentSuccess.route) { PaymentSuccess(navController) }
+        composable(Screen.NewPassword.route) { NewPassword({}, navController) }
+        composable(Screen.ForgotPasswordEmail.route) { PasswordWithEmail({}, navController) }
+        composable(Screen.Settings.route) { SettingsScreen(navController) }
+        composable(Screen.Account.route) { AccountScreen(navController) }
+        composable(Screen.SettingNotifications.route) { SettingNotificationsScreen(navController) }
         composable(
             route = Screen.ProductDetail.route,
             arguments = listOf(navArgument("productId") { type = NavType.IntType })
@@ -90,16 +85,15 @@ fun NavGraph(navController: NavHostController) {
             val productId = backStackEntry.arguments?.getInt("productId") ?: return@composable
             val viewModel: ProductViewModel = hiltViewModel()
             val product = viewModel.products.collectAsState().value.find { it.id == productId }
-
             product?.let {
-                ProductDetailScreen(product = it, navController = navController)
+                ProductDetailScreen(product = it, navController = navController, cartViewModel)
             }
         }
-        composable (Screen.TermsAndPrivacy.route){ PrivacyView(navController) }
-        composable (Screen.ChangeEmail.route){ ChangeEmail(navController) }
-        composable (Screen.ChangePassword.route){ ChangePassword(navController) }
-        composable (Screen.Security.route){ SecurityScreen(navController) }
-        composable (Screen.FAQ.route){ FaqScreen(navController) }
-
+        composable(Screen.TermsAndPrivacy.route) { PrivacyView(navController) }
+        composable(Screen.ChangeEmail.route) { ChangeEmail(navController) }
+        composable(Screen.ChangePassword.route) { ChangePassword(navController) }
+        composable(Screen.Security.route) { SecurityScreen(navController) }
+        composable(Screen.FAQ.route) { FaqScreen(navController) }
     }
 }
+

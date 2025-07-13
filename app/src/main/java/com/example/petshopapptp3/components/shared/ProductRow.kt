@@ -18,10 +18,9 @@ import com.example.petshopapptp3.navigation.Screen
 fun ProductRow(
     rowProducts: List<Product>,
     purple: Color,
-    navController: NavController
+    navController: NavController,
+    onAddToCart: (Product) -> Unit
 ) {
-    val gray = Color(0xFFF6F6F6)
-
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -33,15 +32,20 @@ fun ProductRow(
                 modifier = Modifier.weight(1f),
                 onClick = {
                     navController.navigate(Screen.ProductDetail.createRoute(product.id))
+                },
+                onAddToCart = {
+                    onAddToCart(product)
                 }
             )
         }
-
         if (rowProducts.size == 1) {
             Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
+
+
+
 
 
 

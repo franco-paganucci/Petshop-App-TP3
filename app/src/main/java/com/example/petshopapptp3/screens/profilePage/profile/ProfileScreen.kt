@@ -31,12 +31,14 @@ import com.example.petshopapptp3.components.profile.StatItem
 import com.example.petshopapptp3.components.profile.FilterChip
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
+import com.example.petshopapptp3.viewModel.CartViewModel
 import com.example.petshopapptp3.viewModel.ProductViewModel
 import com.example.petshopapptp3.viewModel.ProfileViewModel
 
 @Composable
 fun ProfileScreen(
     navController: NavController,
+    cartViewModel: CartViewModel,
     profileViewModel: ProfileViewModel = hiltViewModel(),
     productViewModel: ProductViewModel = hiltViewModel()
 ) {
@@ -60,7 +62,6 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                // Header con botones de modo y settings
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -82,7 +83,6 @@ fun ProfileScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Imagen principal (avatar o logo)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -148,7 +148,6 @@ fun ProfileScreen(
                         })
                     }
                 } else {
-
                     Text("Pittashop", fontSize = 22.sp, fontWeight = FontWeight.Bold)
                     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         StatItem("109", "Followers")
@@ -169,10 +168,14 @@ fun ProfileScreen(
                 ProductRow(
                     rowProducts = rowProducts,
                     purple = purple,
-                    navController = navController
+                    navController = navController,
+                    onAddToCart = { product ->
+                        cartViewModel.addProductToCart(product, 1)
+                    }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
     }
 }
+

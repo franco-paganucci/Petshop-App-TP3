@@ -7,11 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import androidx.hilt.navigation.compose.hiltViewModel
 
 import com.example.petshopapptp3.viewModel.ProductViewModel
@@ -22,14 +20,14 @@ import com.example.petshopapptp3.components.shared.HomeTopBar
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.screens.homepage.location.Location
+import com.example.petshopapptp3.viewModel.CartViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, cartViewModel: CartViewModel) {
     val purple = Color(0xFF7B61FF)
     val viewModel: ProductViewModel = hiltViewModel()
     val products by viewModel.products.collectAsState()
-
     var showLocationModal by remember { mutableStateOf(false) }
 
     if (showLocationModal) {
@@ -46,22 +44,23 @@ fun HomeScreen(navController: NavController) {
         item { HomeTopBar(navController, onLocationClick = { showLocationModal = true }) }
         item { PromoCard() }
         item { CategorySection(purple) }
-        item { BestSellerHeader(purple) {
-            navController.navigate(Screen.BestSeller.route)
-        } }
+        item {
+            BestSellerHeader(purple) {
+                navController.navigate(Screen.BestSeller.route)
+            }
+        }
         items(products.take(6).chunked(2)) { rowProducts ->
-            ProductRow(rowProducts = rowProducts, purple = purple, navController = navController)
+            ProductRow(
+                rowProducts = rowProducts,
+                purple = purple,
+                navController = navController,
+                onAddToCart = { product ->
+                    cartViewModel.addProductToCart(product, 1)
+                }
+            )
         }
         item { Spacer(modifier = Modifier.height(24.dp)) }
     }
 }
 
 
-
-
-@Preview(showBackground = true)
-@Composable
-fun ShowHomeScreen() {
-    val navController = rememberNavController()
-    HomeScreen(navController = navController)
-}
