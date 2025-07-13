@@ -1,5 +1,10 @@
-package com.example.petshopapptp3.data.remote
+package com.example.petshopapptp3.data.remote.api
 
+import com.example.petshopapptp3.data.remote.dto.AddToCartRequest
+import com.example.petshopapptp3.data.remote.dto.CartResponse
+import com.example.petshopapptp3.data.remote.dto.LoginRequest
+import com.example.petshopapptp3.data.remote.dto.LoginResponse
+import com.example.petshopapptp3.data.remote.dto.ProductResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

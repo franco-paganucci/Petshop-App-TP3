@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import com.example.petshopapptp3.repository.AuthRepository
-import com.example.petshopapptp3.data.remote.UserProfile
+import com.example.petshopapptp3.data.remote.dto.UserProfile
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(

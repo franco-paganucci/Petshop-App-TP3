@@ -32,12 +32,18 @@ import com.example.petshopapptp3.components.profile.FilterChip
 import com.example.petshopapptp3.components.shared.ProductRow
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewModel.ProductViewModel
+import com.example.petshopapptp3.viewModel.ProfileViewModel
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(
+    navController: NavController,
+    profileViewModel: ProfileViewModel = hiltViewModel(),
+    productViewModel: ProductViewModel = hiltViewModel()
+) {
+    val userProfile by profileViewModel.userProfile.collectAsState()
+    val errorMessage by profileViewModel.errorMessage.collectAsState()
     var isSellerMode by remember { mutableStateOf(false) }
-    val viewModel: ProductViewModel = hiltViewModel()
-    val products by viewModel.products.collectAsState()
+    val products by productViewModel.products.collectAsState()
 
     val backgroundColor = Color.White
     val purple = Color(0xFF7B61FF)
@@ -48,8 +54,7 @@ fun ProfileScreen(navController: NavController) {
             .background(backgroundColor)
     ) {
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -126,9 +131,16 @@ fun ProfileScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-
                 if (!isSellerMode) {
-                    Text("Abduldul", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                    if (userProfile != null) {
+                        Text(userProfile!!.fullName, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                        Text(userProfile!!.email, fontSize = 16.sp, color = Color.Gray)
+                    } else if (errorMessage != null) {
+                        Text("Error: $errorMessage", color = Color.Red)
+                    } else {
+                        CircularProgressIndicator()
+                    }
+
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip("Saved", onClick = { })
                         FilterChip("Edit Profile", onClick = {
@@ -145,8 +157,8 @@ fun ProfileScreen(navController: NavController) {
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip("Product", onClick = {})
-                        FilterChip("Sold" , onClick = {})
-                        FilterChip("Stats" , onClick = {})
+                        FilterChip("Sold", onClick = {})
+                        FilterChip("Stats", onClick = {})
                     }
                 }
 
@@ -164,4 +176,3 @@ fun ProfileScreen(navController: NavController) {
         }
     }
 }
-

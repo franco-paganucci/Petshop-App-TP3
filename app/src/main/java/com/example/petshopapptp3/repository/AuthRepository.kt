@@ -1,6 +1,6 @@
 package com.example.petshopapptp3.repository
 
-import com.example.petshopapptp3.data.remote.UserProfile
+import com.example.petshopapptp3.data.remote.dto.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore

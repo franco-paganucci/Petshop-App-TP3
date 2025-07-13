@@ -5,19 +5,16 @@ import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-import dagger.hilt.android.lifecycle.HiltViewModel
-
 import com.example.petshopapptp3.data.local.CartItemEntity
-import com.example.petshopapptp3.data.remote.CartResponse
-import com.example.petshopapptp3.data.remote.RetroFitInstance
-import com.example.petshopapptp3.data.remote.AddToCartRequest
-import com.example.petshopapptp3.data.remote.CartProduct
+import com.example.petshopapptp3.data.remote.dto.CartResponse
+import com.example.petshopapptp3.data.remote.dto.CartProduct
+import com.example.petshopapptp3.data.remote.dto.Product
 import com.example.petshopapptp3.repository.CartRepository
-import com.example.petshopapptp3.data.remote.Product
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
@@ -35,14 +32,6 @@ class CartViewModel @Inject constructor(
 
     fun addProductToCart(product: Product, quantity: Int) {
         viewModelScope.launch {
-            val index = cartProducts.indexOfFirst { it.id == product.id }
-            if (index != -1) {
-                val existing = cartProducts[index]
-                cartProducts[index] = existing.copy(quantity = existing.quantity + quantity)
-            } else {
-                cartProducts.add(CartProduct(id = product.id, quantity = quantity))
-            }
-
             val entity = CartItemEntity(
                 id = product.id,
                 title = product.title,
@@ -50,20 +39,24 @@ class CartViewModel @Inject constructor(
                 quantity = quantity,
                 thumbnail = product.thumbnail
             )
-            repository.addCartItem(entity)
+            repository.addOrUpdateCartItem(entity)
 
+            val index = cartProducts.indexOfFirst { it.id == product.id }
+            if (index != -1) {
+                val existing = cartProducts[index]
+                cartProducts[index] = existing.copy(quantity = existing.quantity + quantity)
+            } else {
+                cartProducts.add(CartProduct(id = product.id, quantity = quantity))
+            }
         }
     }
-
 
     fun submitCartToApi() {
         viewModelScope.launch {
             try {
-                val response = RetroFitInstance.api.addToCart(
-                    AddToCartRequest(
-                        userId = 1,
-                        products = cartProducts
-                    )
+                val response = repository.submitCart(
+                    userId = 1,
+                    products = cartProducts
                 )
                 _cart.value = response
                 currentCartId = response.id
@@ -72,6 +65,35 @@ class CartViewModel @Inject constructor(
                 println("Carrito enviado y limpiado")
             } catch (e: Exception) {
                 println("Error al enviar carrito: ${e.message}")
+            }
+        }
+    }
+
+    fun fetchCart() {
+        viewModelScope.launch {
+            try {
+                currentCartId?.let { id ->
+                    val response = repository.fetchCart(id)
+                    _cart.value = response
+                    println("Carrito cargado: ${response.products}")
+                } ?: println("No hay carrito activo")
+            } catch (e: Exception) {
+                println("Error al obtener el carrito: ${e.message}")
+            }
+        }
+    }
+
+    fun deleteCart(cartId: Int) {
+        viewModelScope.launch {
+            try {
+                repository.deleteCart(cartId)
+                _cart.value = null
+                currentCartId = null
+                cartProducts.clear()
+                clearLocalCart()
+                println("Carrito eliminado")
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
@@ -105,35 +127,6 @@ class CartViewModel @Inject constructor(
             cartProducts.clear()
             _cart.value = null
             currentCartId = null
-        }
-    }
-
-    fun fetchCart() {
-        viewModelScope.launch {
-            try {
-                currentCartId?.let { id ->
-                    val response = RetroFitInstance.api.getCartById(id)
-                    _cart.value = response
-                    println("Carrito cargado: ${response.products}")
-                } ?: println("No hay carrito activo")
-            } catch (e: Exception) {
-                println("Error al obtener el carrito: ${e.message}")
-            }
-        }
-    }
-
-    fun deleteCart(cartId: Int) {
-        viewModelScope.launch {
-            try {
-                RetroFitInstance.api.deleteCart(cartId)
-                _cart.value = null
-                currentCartId = null
-                cartProducts.clear()
-                clearLocalCart()
-                println("Carrito eliminado")
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
         }
     }
 }

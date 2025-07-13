@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
-import com.example.petshopapptp3.data.remote.Product
+import com.example.petshopapptp3.data.remote.dto.Product
 import com.example.petshopapptp3.navigation.Screen
 
 @Composable
