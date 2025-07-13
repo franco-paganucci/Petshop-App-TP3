@@ -82,13 +82,14 @@ fun SettingsScreen(navController: NavController) {
         Button(
             onClick = { navController.navigate(Screen.Login.route) },
             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-            border = ButtonDefaults.outlinedButtonBorder.copy(width = 1.dp),
+            border = ButtonDefaults.outlinedButtonBorder(enabled = true).copy(width = 1.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
             Text("Log Out", color = Color(0xFF7B61FF))
         }
+
     }
 }
 

@@ -40,8 +40,7 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationBar(
             containerColor = Color(0xFFF8F8F8),
             tonalElevation = 0.dp,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             items.forEach { (screen, icon) ->
                 val isSelected = currentRoute == screen.route
@@ -50,7 +49,7 @@ fun BottomNavigationBar(navController: NavController) {
                     onClick = {
                         if (currentRoute != screen.route) {
                             navController.navigate(screen.route) {
-                                popUpTo(navController.graph.startDestinationId) {
+                                popUpTo(Screen.Home.route) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -90,4 +89,5 @@ fun BottomNavigationBar(navController: NavController) {
         }
     }
 }
+
 

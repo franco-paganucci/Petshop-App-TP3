@@ -28,7 +28,8 @@ fun ProductCard(
     product: Product,
     purple: Color,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onAddToCart: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -75,7 +76,8 @@ fun ProductCard(
                 .size(32.dp)
                 .align(Alignment.BottomEnd)
                 .offset(x = (-8).dp, y = (-8).dp)
-                .background(purple, CircleShape),
+                .background(purple, CircleShape)
+                .clickable { onAddToCart() },
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -86,4 +88,5 @@ fun ProductCard(
         }
     }
 }
+
 

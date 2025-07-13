@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
 import com.example.petshopapptp3.components.homePage.cart.CartItem
@@ -29,10 +28,11 @@ import com.example.petshopapptp3.viewModel.CartViewModel
 @Composable
 fun CartScreen(
     navController: NavController,
-    cartViewModel: CartViewModel = hiltViewModel()
+    cartViewModel: CartViewModel
 ) {
     val sizes = responsiveSizes()
     val cartItems by cartViewModel.localCartItems.collectAsState(initial = emptyList())
+    val cartTotal by cartViewModel.cartTotal.collectAsState(initial = 0.0)
     val purple = Color(0xFF7B61FF)
 
     Column(
@@ -58,17 +58,13 @@ fun CartScreen(
                 }
             }
 
-            IconButton(onClick = {
-                cartViewModel.clearEverything()
-            }) {
+            IconButton(onClick = { cartViewModel.clearEverything() }) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Eliminar carrito",
                     tint = Color.Red
                 )
             }
-
-            val total = cartItems.sumOf { it.price * it.quantity }
 
             CartSummary(
                 cartItems = cartItems.map {
@@ -80,7 +76,7 @@ fun CartScreen(
                     )
                 },
                 purple = purple,
-                totalPrice = total,
+                totalPrice = cartTotal ?: 0.0,
                 navController = navController
             )
 
@@ -92,4 +88,6 @@ fun CartScreen(
         }
     }
 }
+
+
 

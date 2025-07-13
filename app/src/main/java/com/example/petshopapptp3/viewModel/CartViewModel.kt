@@ -22,6 +22,7 @@ class CartViewModel @Inject constructor(
 ) : ViewModel() {
 
     val localCartItems = repository.cartItems
+    val cartTotal = repository.cartTotal
 
     private val _cart = MutableStateFlow<CartResponse?>(null)
     val cart = _cart.asStateFlow()

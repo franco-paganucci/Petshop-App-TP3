@@ -25,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.data.remote.dto.Product
+import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.viewModel.CartViewModel
 import com.example.petshopapptp3.util.responsiveSizes
 
@@ -32,7 +33,7 @@ import com.example.petshopapptp3.util.responsiveSizes
 fun ProductDetailScreen(
     product: Product,
     navController: NavController,
-    cartViewModel: CartViewModel = hiltViewModel()
+    cartViewModel: CartViewModel
 ) {
     val purple = Color(0xFF7B61FF)
     var quantity by remember { mutableIntStateOf(1) }
@@ -41,9 +42,7 @@ fun ProductDetailScreen(
     val sizes = responsiveSizes()
 
     Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        }
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -135,6 +134,7 @@ fun ProductDetailScreen(
                     cartViewModel.addProductToCart(product, quantity)
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar("Producto/s agregado/s al carrito")
+                        navController.navigate(Screen.Cart.route)
                     }
                 }
             )

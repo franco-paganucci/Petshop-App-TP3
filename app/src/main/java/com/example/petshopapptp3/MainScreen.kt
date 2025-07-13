@@ -18,7 +18,6 @@ import com.example.petshopapptp3.navigation.Screen
 fun MainScreen() {
     val navController = rememberNavController()
 
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -39,12 +38,9 @@ fun MainScreen() {
         Screen.Security.route,
         Screen.Notification.route,
         Screen.SettingNotifications.route,
-        Screen.TermsAndPrivacy.route,
         Screen.FAQ.route,
         Screen.BestSeller.route,
         Screen.Search.route
-
-
     )
 
     val showBottomBar = currentRoute !in hideBottomBarRoutes
