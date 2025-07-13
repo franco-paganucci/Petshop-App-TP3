@@ -11,7 +11,7 @@ import androidx.lifecycle.viewModelScope
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 
-import com.example.petshopapptp3.data.remote.UserProfile
+import com.example.petshopapptp3.data.remote.dto.UserProfile
 import com.example.petshopapptp3.repository.AuthRepository
 
 @HiltViewModel

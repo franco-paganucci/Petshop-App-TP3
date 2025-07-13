@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 import coil.compose.AsyncImage
 
-import com.example.petshopapptp3.data.remote.Product
+import com.example.petshopapptp3.data.remote.dto.Product
 import com.example.petshopapptp3.ui.theme.cardColor
 
 

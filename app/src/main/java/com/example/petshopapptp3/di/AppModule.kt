@@ -4,14 +4,16 @@ import android.app.Application
 
 import androidx.room.Room
 
+import javax.inject.Singleton
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 import com.example.petshopapptp3.data.local.AppDatabase
 import com.example.petshopapptp3.data.local.CartDao
+import com.example.petshopapptp3.data.remote.api.ApiService
 import com.example.petshopapptp3.repository.CartRepository
 
 @Module
@@ -29,8 +31,9 @@ object AppModule {
     fun provideCartDao(db: AppDatabase): CartDao = db.cartDao()
 
     @Provides
-    fun provideCartRepository(cartDao: CartDao): CartRepository =
-        CartRepository(cartDao)
+    @Singleton
+    fun provideCartRepository(cartDao: CartDao, apiService: ApiService): CartRepository =
+        CartRepository(cartDao, apiService)
 }
 
 

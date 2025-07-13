@@ -24,7 +24,7 @@ import coil.compose.rememberAsyncImagePainter
 
 import com.example.petshopapptp3.components.buttons.StartButton
 import com.example.petshopapptp3.components.shared.ArrowTitle
-import com.example.petshopapptp3.data.remote.Product
+import com.example.petshopapptp3.data.remote.dto.Product
 import com.example.petshopapptp3.viewModel.CartViewModel
 import com.example.petshopapptp3.util.responsiveSizes
 
