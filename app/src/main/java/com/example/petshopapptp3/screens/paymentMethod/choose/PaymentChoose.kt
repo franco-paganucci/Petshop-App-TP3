@@ -30,6 +30,9 @@ fun PaymentChoose(
     val sizes = responsiveSizes()
     var selectedMethod by remember { mutableStateOf("Paypal") }
 
+    val cartTotal by cartViewModel.cartTotal.collectAsState(initial = 0.0)
+    val totalCartAmount = cartTotal ?: 0.0
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -76,11 +79,21 @@ fun PaymentChoose(
         StartButton(
             text = "Checkout",
             onClick = {
-                cartViewModel.clearEverything()
-                navController.navigate(Screen.PaymentSuccess.route)
+                cartViewModel.saveCheckoutToFirestore(
+                    total = totalCartAmount,
+                    paymentMethod = selectedMethod,
+                    onSuccess = {
+                        cartViewModel.clearEverything()
+                        navController.navigate(Screen.PaymentSuccess.route)
+                    },
+                    onError = { error ->
+                        println("Error guardando checkout: $error")
+                    }
+                )
             },
             ButtonColor = purple,
         )
+
 
         Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
     }

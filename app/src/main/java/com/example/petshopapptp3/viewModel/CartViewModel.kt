@@ -1,24 +1,29 @@
 package com.example.petshopapptp3.viewModel
 
-import javax.inject.Inject
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+import javax.inject.Inject
+
 import com.example.petshopapptp3.data.local.CartItemEntity
-import com.example.petshopapptp3.data.remote.dto.CartResponse
 import com.example.petshopapptp3.data.remote.dto.CartProduct
+import com.example.petshopapptp3.data.remote.dto.CartResponse
+import com.example.petshopapptp3.data.remote.dto.CheckoutItem
 import com.example.petshopapptp3.data.remote.dto.Product
 import com.example.petshopapptp3.repository.CartRepository
+import com.example.petshopapptp3.repository.CheckoutRepository
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val repository: CartRepository
+    private val repository: CartRepository,
+    private val checkoutRepository: CheckoutRepository
 ) : ViewModel() {
 
     val localCartItems = repository.cartItems
@@ -28,7 +33,6 @@ class CartViewModel @Inject constructor(
     val cart = _cart.asStateFlow()
 
     private var currentCartId: Int? = null
-
     private val cartProducts = mutableListOf<CartProduct>()
 
     fun addProductToCart(product: Product, quantity: Int) {
@@ -99,7 +103,7 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    fun saveCartToLocal(cart: CartResponse) {
+    private fun saveCartToLocal(cart: CartResponse) {
         viewModelScope.launch {
             repository.clearCart()
             cart.products.forEach {
@@ -115,7 +119,7 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    fun clearLocalCart() {
+    private fun clearLocalCart() {
         viewModelScope.launch {
             repository.clearCart()
             cartProducts.clear()
@@ -128,6 +132,36 @@ class CartViewModel @Inject constructor(
             cartProducts.clear()
             _cart.value = null
             currentCartId = null
+        }
+    }
+
+    fun saveCheckoutToFirestore(
+        total: Double,
+        paymentMethod: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            try {
+                val itemsList = repository.cartItems.first()
+                val items = itemsList.map {
+                    CheckoutItem(
+                        id = it.id,
+                        title = it.title,
+                        price = it.price,
+                        quantity = it.quantity,
+                        thumbnail = it.thumbnail
+                    )
+                }
+                val result = checkoutRepository.saveCheckout(total, paymentMethod, items)
+                if (result.isSuccess) {
+                    onSuccess()
+                } else {
+                    onError(result.exceptionOrNull()?.message ?: "Unknown error")
+                }
+            } catch (e: Exception) {
+                onError(e.message ?: "Unknown error")
+            }
         }
     }
 }
