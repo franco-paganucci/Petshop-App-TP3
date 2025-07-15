@@ -1,6 +1,13 @@
 package com.example.petshopapptp3.navigation
 
-sealed class Screen(val route: String) {
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
+sealed class Screen(
+    val route: String,
+    val arguments: List<NamedNavArgument> = emptyList()
+) {
     data object OnBoarding : Screen("onBoarding")
     data object Login : Screen("login")
     data object CreateAccount : Screen("create_account")
@@ -13,11 +20,18 @@ sealed class Screen(val route: String) {
     data object BestSeller : Screen("best_seller")
     data object Notification : Screen("notification")
     data object Search : Screen("search")
-    data object PaymentAdd: Screen("payment_add") {
-        fun createRoute(fromSettings: Boolean) = "payment_add/$fromSettings"
+    data object CheckoutAddPaymentMethod: Screen("checkout_add_payment_method")
+    data object Checkout: Screen("checkout")
+    data object PaymentSuccess: Screen(
+        route = "payment_success_screen/{paymentType}",
+        arguments = listOf(navArgument("paymentType") {
+            type = NavType.StringType
+            defaultValue = "Unknown"
+            nullable = true
+        })
+    ) {
+        fun createRoute(paymentType: String) = "payment_success_screen/$paymentType"
     }
-    data object PaymentChoose: Screen("paymentChoose")
-    data object PaymentSuccess: Screen("paymentSuccess")
     data object NewPassword: Screen("newPassword")
     data object ForgotPasswordEmail: Screen("forgotPasswordEmail")
     data object TermsAndPrivacy: Screen("privacy")

@@ -119,7 +119,8 @@ fun CreateAccount(
                 },
                 isError = fullNameError,
                 fontSize = sizes.inputFontSize,
-                paddingVertical = sizes.inputPaddingVertical
+                paddingVertical = sizes.inputPaddingVertical,
+                height = sizes.inputHeight
             )
             Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
@@ -132,7 +133,8 @@ fun CreateAccount(
                 },
                 isError = emailError,
                 fontSize = sizes.inputFontSize,
-                paddingVertical = sizes.inputPaddingVertical
+                paddingVertical = sizes.inputPaddingVertical,
+                height = sizes.inputHeight
             )
             Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))
 
@@ -146,7 +148,8 @@ fun CreateAccount(
                 isPassword = true,
                 isError = passwordError,
                 fontSize = sizes.inputFontSize,
-                paddingVertical = sizes.inputPaddingVertical
+                paddingVertical = sizes.inputPaddingVertical,
+                height = sizes.inputHeight
             )
 
             Spacer(modifier = Modifier.height(sizes.spacerHeightLarge))

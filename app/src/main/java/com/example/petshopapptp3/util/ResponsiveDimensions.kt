@@ -17,6 +17,11 @@ data class ResponsiveSizes(
     // Layout
     val paddingHorizontal: Dp,
     val spacerHeightLarge: Dp,
+    val spacerHeightMedium: Dp,
+    val spacerHeightSmall: Dp,
+    val paddingSmall: Dp,
+    val paddingMedium: Dp,
+
     val subtitleFont: TextUnit,
     val inputPaddingVertical: Dp,
 
@@ -38,7 +43,12 @@ data class ResponsiveSizes(
     val promoLineHeightTitle: TextUnit,
     val promoLineHeightSubtitle: TextUnit,
 
-    val loginBottomSpacing: Dp
+    val loginBottomSpacing: Dp,
+
+    val cardElevation: Dp,
+    val cardCornerRadius: Dp,
+    val iconSizeMedium: Dp,
+    val iconSizeSmall: Dp,
 )
 
 @Composable
@@ -53,6 +63,10 @@ fun responsiveSizes(): ResponsiveSizes {
             paddingTop = 4.dp,
             paddingHorizontal = 16.dp,
             spacerHeightLarge = 16.dp,
+            spacerHeightMedium = 12.dp,
+            spacerHeightSmall = 8.dp,
+            paddingSmall = 4.dp,
+            paddingMedium = 8.dp,
             subtitleFont = 12.sp,
             inputPaddingVertical = 4.dp,
             inputHeight = 40.dp,
@@ -70,7 +84,11 @@ fun responsiveSizes(): ResponsiveSizes {
             promoSubtitleFontSize = 12.sp,
             promoLineHeightTitle = 16.sp,
             promoLineHeightSubtitle = 14.sp,
-            loginBottomSpacing = 30.dp
+            loginBottomSpacing = 30.dp,
+            cardElevation = 2.dp,
+            cardCornerRadius = 8.dp,
+            iconSizeMedium = 20.dp,
+            iconSizeSmall = 16.dp,
             )
 
         WindowSize.MEDIUM -> ResponsiveSizes(
@@ -82,6 +100,10 @@ fun responsiveSizes(): ResponsiveSizes {
             paddingTop = 8.dp,
             paddingHorizontal = 24.dp,
             spacerHeightLarge = 20.dp,
+            spacerHeightMedium = 16.dp,
+            spacerHeightSmall = 12.dp,
+            paddingSmall = 8.dp,
+            paddingMedium = 12.dp,
             subtitleFont = 14.sp,
             inputPaddingVertical = 8.dp,
             inputHeight = 56.dp,
@@ -99,7 +121,11 @@ fun responsiveSizes(): ResponsiveSizes {
             promoSubtitleFontSize = 14.sp,
             promoLineHeightTitle = 18.sp,
             promoLineHeightSubtitle = 16.sp,
-            loginBottomSpacing = 50.dp
+            loginBottomSpacing = 50.dp,
+            cardElevation = 4.dp,
+            cardCornerRadius = 12.dp,
+            iconSizeMedium = 24.dp,
+            iconSizeSmall = 20.dp,
             )
 
         WindowSize.LARGE -> ResponsiveSizes(
@@ -111,6 +137,10 @@ fun responsiveSizes(): ResponsiveSizes {
             paddingTop = 24.dp,
             paddingHorizontal = 32.dp,
             spacerHeightLarge = 24.dp,
+            spacerHeightMedium = 20.dp,
+            spacerHeightSmall = 16.dp,
+            paddingSmall = 12.dp,
+            paddingMedium = 16.dp,
             subtitleFont = 16.sp,
             inputPaddingVertical = 12.dp,
             inputHeight = 64.dp,
@@ -128,7 +158,11 @@ fun responsiveSizes(): ResponsiveSizes {
             promoSubtitleFontSize = 16.sp,
             promoLineHeightTitle = 20.sp,
             promoLineHeightSubtitle = 18.sp,
-            loginBottomSpacing = 80.dp
+            loginBottomSpacing = 80.dp,
+            cardElevation = 6.dp,
+            cardCornerRadius = 16.dp,
+            iconSizeMedium = 28.dp,
+            iconSizeSmall = 24.dp,
             )
     }
 }
