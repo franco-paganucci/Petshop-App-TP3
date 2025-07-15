@@ -24,6 +24,7 @@ import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.disableButton
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.responsiveSizes
 
 @Composable
 fun NewPassword(onLoginClick: () -> Unit = { }, navController: NavController) {
@@ -35,6 +36,8 @@ fun NewPassword(onLoginClick: () -> Unit = { }, navController: NavController) {
 
     val isValid = password.isNotBlank() && confirmPassword.isNotBlank() && password == confirmPassword
     val buttonColor = if (isValid) purple else disableButton
+
+    val sizes = responsiveSizes()
 
     Column(
         modifier = Modifier
@@ -59,7 +62,10 @@ fun NewPassword(onLoginClick: () -> Unit = { }, navController: NavController) {
             },
             isPassword = true,
             isError = passwordError,
-            showError = true
+            showError = true,
+            fontSize = sizes.inputFontSize,
+            height = sizes.inputHeight,
+            paddingVertical = sizes.inputPaddingVertical
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -75,6 +81,9 @@ fun NewPassword(onLoginClick: () -> Unit = { }, navController: NavController) {
             isPassword = true,
             isError = confirmPasswordError || mismatchError,
             showError = true,
+            fontSize = sizes.inputFontSize,
+            height = sizes.inputHeight,
+            paddingVertical = sizes.inputPaddingVertical
         )
 
         Spacer(modifier = Modifier.height(300.dp))

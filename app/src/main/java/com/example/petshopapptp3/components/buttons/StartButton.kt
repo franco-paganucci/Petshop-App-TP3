@@ -1,5 +1,7 @@
 package com.example.petshopapptp3.components.buttons
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +23,9 @@ fun StartButton(
     text: String,
     ButtonColor: Color,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    textColor: Color = Color.White
 ) {
     val sizes = responsiveSizes()
 
@@ -31,12 +35,13 @@ fun StartButton(
         modifier = modifier
             .fillMaxWidth()
             .height(sizes.buttonHeight),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        enabled = enabled
     ) {
         Text(
             text = text,
             fontSize = sizes.buttonFontSize,
-            color = Color.White
+            color = textColor
         )
     }
 }
@@ -44,7 +49,11 @@ fun StartButton(
 @Preview(showBackground = true)
 @Composable
 fun ShowButton(){
-     ProvideWindowSize {
-        StartButton(text = "Show", onClick = { }, ButtonColor = purple)
-     }
+    ProvideWindowSize {
+        Column {
+            StartButton(text = "Enabled Button", onClick = { }, ButtonColor = purple, enabled = true)
+            Spacer(modifier = Modifier.height(16.dp))
+            StartButton(text = "Disabled Button", onClick = { }, ButtonColor = Color.Gray, enabled = false)
+        }
+    }
 }

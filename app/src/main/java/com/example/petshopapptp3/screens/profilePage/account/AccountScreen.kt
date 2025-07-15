@@ -28,6 +28,7 @@ import com.example.petshopapptp3.components.shared.ArrowTitle
 import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.responsiveSizes
 import com.example.petshopapptp3.viewModel.AuthViewModel
 
 @Composable
@@ -40,6 +41,8 @@ fun AccountScreen(
 
     val profileState by viewModel.userProfile.collectAsState()
     val updateState by viewModel.updateState.collectAsState()
+
+    val sizes = responsiveSizes()
 
     var showMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(true) } // Initialize to true for initial load
@@ -174,9 +177,23 @@ fun AccountScreen(
 
             Spacer(modifier = Modifier.height(60.dp))
 
-            InputField(label = "Name", value = name, onValueChange = { name = it })
+            InputField(
+                label = "Name",
+                value = name,
+                onValueChange = { name = it },
+                fontSize = sizes.inputFontSize,
+                height = sizes.inputHeight,
+                paddingVertical = sizes.inputPaddingVertical
+            )
             Spacer(modifier = Modifier.height(12.dp))
-            InputField(label = "Email", value = email, onValueChange = { email = it })
+            InputField(
+                label = "Email",
+                value = email,
+                onValueChange = { email = it },
+                fontSize = sizes.inputFontSize,
+                height = sizes.inputHeight,
+                paddingVertical = sizes.inputPaddingVertical
+            )
 
             showMessage?.let { message ->
                 Spacer(modifier = Modifier.height(16.dp))

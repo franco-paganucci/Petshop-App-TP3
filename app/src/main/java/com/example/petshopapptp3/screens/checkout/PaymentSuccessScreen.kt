@@ -1,4 +1,4 @@
-package com.example.petshopapptp3.screens.paymentMethod.success
+package com.example.petshopapptp3.screens.checkout
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -19,7 +21,10 @@ import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.purple
 
 @Composable
-fun PaymentSuccess(navController: NavController) {
+fun PaymentSuccessScreen(
+    navController: NavController,
+    paymentType: String?
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,15 +39,26 @@ fun PaymentSuccess(navController: NavController) {
             TitleSection("Payment\nSuccess!")
             Spacer(modifier = Modifier.height(10.dp))
             SubtitleSection("Your order is being prepared by the shop, the courier will send it to your address")
+
+            if (paymentType == "PayPal" || paymentType == "Bank Transfer") {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Payment instructions will be sent to your email address shortly.",
+                    color = Color.Gray,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
         StartButton("Go Home", onClick = {
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Screen.Home.route) {
+                popUpTo(Screen.Home.route) { inclusive = true }
+                launchSingleTop = true
+            }
         },
             ButtonColor = purple
         )
     }
 }
-

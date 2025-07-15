@@ -56,7 +56,7 @@ fun SettingsScreen(navController: NavController) {
                 navController.navigate(Screen.SettingNotifications.route)
             }
             SettingsRow("Payment Method", R.drawable.wallet) {
-                navController.navigate(Screen.PaymentAdd.createRoute(true))
+                navController.navigate(Screen.CheckoutAddPaymentMethod.route)
             }
             SettingsRow("Privacy", R.drawable.danger_circle) {
                 navController.navigate(Screen.TermsAndPrivacy.route)

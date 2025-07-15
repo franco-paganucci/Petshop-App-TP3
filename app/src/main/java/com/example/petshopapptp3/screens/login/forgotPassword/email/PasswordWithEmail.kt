@@ -25,6 +25,7 @@ import com.example.petshopapptp3.components.shared.InputField
 import com.example.petshopapptp3.navigation.Screen
 import com.example.petshopapptp3.ui.theme.disableButton
 import com.example.petshopapptp3.ui.theme.purple
+import com.example.petshopapptp3.util.responsiveSizes
 
 @Composable
 fun PasswordWithEmail(onLoginClick: () -> Unit, navController: NavController) {
@@ -33,6 +34,8 @@ fun PasswordWithEmail(onLoginClick: () -> Unit, navController: NavController) {
 
     val isValid = email.isNotBlank()
     val buttonColor = if (isValid) purple else disableButton
+
+    val sizes = responsiveSizes()
 
     Column(
         modifier = Modifier
@@ -55,7 +58,10 @@ fun PasswordWithEmail(onLoginClick: () -> Unit, navController: NavController) {
             },
             isError = emailError,
             showError = true,
-            label = "email"
+            label = "email",
+            fontSize = sizes.inputFontSize,
+            height = sizes.inputHeight,
+            paddingVertical = sizes.inputPaddingVertical
         )
 
         Spacer(modifier = Modifier.height(400.dp))

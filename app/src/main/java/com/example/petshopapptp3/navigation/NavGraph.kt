@@ -2,16 +2,12 @@ package com.example.petshopapptp3.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 
 import com.example.petshopapptp3.screens.homepage.bestSeller.BestSellerScreen
 import com.example.petshopapptp3.screens.homepage.home.HomeScreen
@@ -24,9 +20,9 @@ import com.example.petshopapptp3.screens.login.createAccount.CreateAccount
 import com.example.petshopapptp3.screens.login.forgotPassword.email.PasswordWithEmail
 import com.example.petshopapptp3.screens.login.forgotPassword.newPassword.NewPassword
 import com.example.petshopapptp3.screens.onBoardign.OnBoarding
-import com.example.petshopapptp3.screens.paymentMethod.add.PaymentAdd
-import com.example.petshopapptp3.screens.paymentMethod.choose.PaymentChoose
-import com.example.petshopapptp3.screens.paymentMethod.success.PaymentSuccess
+import com.example.petshopapptp3.screens.checkout.CheckoutAddPaymentMethodScreen
+import com.example.petshopapptp3.screens.checkout.CheckoutScreen
+import com.example.petshopapptp3.screens.checkout.PaymentSuccessScreen
 import com.example.petshopapptp3.screens.profilePage.account.AccountScreen
 import com.example.petshopapptp3.screens.profilePage.change.ChangeEmail
 import com.example.petshopapptp3.screens.profilePage.change.ChangePassword
@@ -61,18 +57,20 @@ fun NavGraph(
         composable(Screen.BestSeller.route) { BestSellerScreen(navController) }
         composable(Screen.Notification.route) { NotificationScreen(navController) }
         composable(Screen.Search.route) { SearchScreen(navController) }
+        composable(Screen.CheckoutAddPaymentMethod.route) {
+            CheckoutAddPaymentMethodScreen(navController, cartViewModel)
+        }
+        composable(Screen.Checkout.route) {
+            CheckoutScreen(navController, cartViewModel)
+        }
         composable(
-            route = "payment_add/{fromSettings}",
-            arguments = listOf(navArgument("fromSettings") { type = NavType.StringType })
+            route = Screen.PaymentSuccess.route,
+            arguments = Screen.PaymentSuccess.arguments
         ) { backStackEntry ->
-            val fromSettingsString = backStackEntry.arguments?.getString("fromSettings") ?: "false"
-            val fromSettings = fromSettingsString.toBooleanStrictOrNull() ?: false
-            PaymentAdd(navController, fromSettings)
+            val paymentType = backStackEntry.arguments?.getString("paymentType")
+            PaymentSuccessScreen(navController, paymentType)
         }
-        composable(Screen.PaymentChoose.route) {
-            PaymentChoose(navController, cartViewModel)
-        }
-        composable(Screen.PaymentSuccess.route) { PaymentSuccess(navController) }
+
         composable(Screen.NewPassword.route) { NewPassword({}, navController) }
         composable(Screen.ForgotPasswordEmail.route) { PasswordWithEmail({}, navController) }
         composable(Screen.Settings.route) { SettingsScreen(navController) }
@@ -96,4 +94,3 @@ fun NavGraph(
         composable(Screen.FAQ.route) { FaqScreen(navController) }
     }
 }
-
