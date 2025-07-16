@@ -75,6 +75,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
